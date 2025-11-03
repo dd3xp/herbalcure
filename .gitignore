@@ -1,0 +1,37 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+
+# notes
+notes.md
+
+# jar signing
+herbalcure.jks
+*.jks
+*.keystore
+
+# gradle.properties (may contain sensitive signing information)
+# Uncomment the following line if you want to exclude gradle.properties
+# gradle.properties

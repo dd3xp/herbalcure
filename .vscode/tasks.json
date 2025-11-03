@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Mod",
+            "type": "shell",
+            "command": "${workspaceFolder}\\gradlew.bat",
+            "args": ["build"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run Client",
+            "type": "shell",
+            "command": "${workspaceFolder}\\gradlew.bat",
+            "args": ["runClient"],
+            "problemMatcher": [],
+            "group": "test"
+        },
+        {
+            "label": "Run Server",
+            "type": "shell",
+            "command": "${workspaceFolder}\\gradlew.bat",
+            "args": ["runServer"],
+            "problemMatcher": [],
+            "group": "test"
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "${workspaceFolder}\\gradlew.bat",
+            "args": ["clean"],
+            "problemMatcher": []
+        }
+    ]
+}
+

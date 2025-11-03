@@ -1,0 +1,11 @@
+{
+  "homepage": "https://example.com/herbalcure",
+  "1.12.2": {
+    "1.0": "Initial release of HerbalCure mod. Adds various herbs, plants, and related crafting recipes."
+  },
+  "promos": {
+    "1.12.2-latest": "1.0",
+    "1.12.2-recommended": "1.0"
+  }
+}
+
