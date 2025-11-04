@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "herbalcure:blocks/jungle_heartwood_log_top",
+        "side": "herbalcure:blocks/jungle_heartwood_log"
+    }
+}
+

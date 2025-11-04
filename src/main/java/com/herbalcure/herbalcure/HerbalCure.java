@@ -1,8 +1,10 @@
 package com.herbalcure.herbalcure;
 
 import com.herbalcure.herbalcure.client.proxy.ClientProxy;
+import com.herbalcure.herbalcure.common.creativetab.HerbalCureCreativeTab;
 import com.herbalcure.herbalcure.common.proxy.CommonProxy;
 import com.herbalcure.herbalcure.server.proxy.ServerProxy;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,12 +17,18 @@ import org.apache.logging.log4j.Logger;
  * HerbalCure Mod main class
  * This is the mod entry point, marked with @Mod annotation
  */
-@Mod(modid = HerbalCure.MODID, name = HerbalCure.NAME, version = HerbalCure.VERSION, useMetadata = true, updateJSON = "https://example.com/herbalcure/update.json", certificateFingerprint = "d0eae99d377639e0301cd3e4177c2895baf6fcba")
+@Mod(modid = HerbalCure.MODID, name = HerbalCure.NAME, version = HerbalCure.VERSION, useMetadata = true, updateJSON = "https://raw.githubusercontent.com/dd3xp/herbalcure/main/update.json", certificateFingerprint = "d0eae99d377639e0301cd3e4177c2895baf6fcba")
 public class HerbalCure
 {
     public static final String MODID = "herbalcure";
     public static final String NAME = "HerbalCure";
     public static final String VERSION = "1.0";
+
+    /**
+     * Creative tab for HerbalCure mod items
+     * All mod items will appear in this creative tab
+     */
+    public static final CreativeTabs CREATIVE_TAB = new HerbalCureCreativeTab();
 
     private static Logger logger;
 

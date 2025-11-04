@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "axis=y":  { "model": "herbalcure:jungle_heartwood_log" },
+        "axis=z":   { "model": "herbalcure:jungle_heartwood_log", "x": 90 },
+        "axis=x":   { "model": "herbalcure:jungle_heartwood_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "herbalcure:jungle_heartwood_log" }
+    }
+}
+

@@ -3,3 +3,7 @@
 # Format: key=value
 # Use snake_case for keys (lowercase with underscores)
 
+# Blocks
+tile.jungle_heartwood_log.name=Jungle Heartwood Log
+tile.jungle_heartwood_leaves.name=Jungle Heartwood Leaves
+
