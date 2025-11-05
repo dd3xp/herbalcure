@@ -17,7 +17,14 @@ import org.apache.logging.log4j.Logger;
  * HerbalCure Mod main class
  * This is the mod entry point, marked with @Mod annotation
  */
-@Mod(modid = HerbalCure.MODID, name = HerbalCure.NAME, version = HerbalCure.VERSION, useMetadata = true, updateJSON = "https://raw.githubusercontent.com/dd3xp/herbalcure/main/update.json", certificateFingerprint = "d0eae99d377639e0301cd3e4177c2895baf6fcba")
+@Mod(
+    modid = HerbalCure.MODID, 
+    name = HerbalCure.NAME, 
+    version = HerbalCure.VERSION, 
+    useMetadata = true, 
+    updateJSON = "https://raw.githubusercontent.com/dd3xp/herbalcure/main/update.json", 
+    certificateFingerprint = "c66c93d47927d06d9ac4aab9cb6b637a0f638d2d"
+    )
 public class HerbalCure
 {
     public static final String MODID = "herbalcure";
