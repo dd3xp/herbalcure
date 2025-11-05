@@ -45,27 +45,36 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
         // Check if biome is forest-related
         if (isForestBiome(biome))
         {
-            // Generate trees in this chunk with low frequency
-            // Only 15% chance to generate a tree in each chunk (approximately every 3-4 chunks = 48-64 blocks)
-            // This means roughly every 50-60 blocks you'll see one tree
-            if (random.nextInt(100) < 15) // 15% chance
+            // Generate trees in this chunk
+            // 30% chance to attempt generation, with 1-2 attempts per chunk
+            // This balances frequency with available space (4-block spacing requirement)
+            // Approximately every 35-40 blocks you'll see one tree
+            if (random.nextInt(100) < 30) // 30% chance
             {
-                // Random position within chunk
-                int xPos = x + random.nextInt(16);
-                int zPos = z + random.nextInt(16);
+                // Try to generate 1-2 trees (but may fail if no suitable position)
+                int attempts = random.nextInt(2) + 1; // 1 or 2 attempts
                 
-                // Find suitable ground level
-                int yPos = findGroundLevel(world, xPos, zPos);
-                
-                if (yPos > 0)
+                for (int attempt = 0; attempt < attempts; attempt++)
                 {
-                    BlockPos treePos = new BlockPos(xPos, yPos, zPos);
+                    // Random position within chunk
+                    int xPos = x + random.nextInt(16);
+                    int zPos = z + random.nextInt(16);
                     
-                    // Check if position is suitable for tree
-                    if (isSuitablePosition(world, treePos))
+                    // Find suitable ground level
+                    int yPos = findGroundLevel(world, xPos, zPos);
+                    
+                    if (yPos > 0)
                     {
-                        // Generate tree
-                        treeGenerator.generate(world, random, treePos);
+                        BlockPos treePos = new BlockPos(xPos, yPos, zPos);
+                        
+                        // Check if position is suitable for tree
+                        if (isSuitablePosition(world, treePos))
+                        {
+                            // Generate tree
+                            treeGenerator.generate(world, random, treePos);
+                            // Break after first successful generation to avoid clustering
+                            break;
+                        }
                     }
                 }
             }
@@ -119,7 +128,7 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
 
     /**
      * Check if position is suitable for tree generation
-     * Ensures there's enough space and proper ground
+     * Ensures there's enough space and proper ground, and not too close to other trees
      */
     private boolean isSuitablePosition(World world, BlockPos pos)
     {
@@ -146,6 +155,46 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
                 block != Blocks.VINE)
             {
                 return false;
+            }
+        }
+        
+        // Check if there are other tree trunks nearby - keep at least 4 blocks away
+        // Similar to IC2 rubber trees and Thaumcraft silverwood - only check for nearby logs
+        // This prevents trees from generating inside other trees, but allows reasonable spacing
+        int checkRadius = 4; // Minimum distance from other tree trunks (horizontal)
+        
+        // Only check ground level and a few blocks above for logs (trunks)
+        // This is more efficient and matches how other mods handle tree generation
+        for (int x = -checkRadius; x <= checkRadius; x++)
+        {
+            for (int z = -checkRadius; z <= checkRadius; z++)
+            {
+                // Skip the center position itself
+                if (x == 0 && z == 0)
+                {
+                    continue;
+                }
+                
+                // Only check horizontal distance
+                double horizontalDist = Math.sqrt(x * x + z * z);
+                if (horizontalDist > checkRadius)
+                {
+                    continue;
+                }
+                
+                // Check ground level and up to 10 blocks above for logs (trunk area)
+                // This is where tree trunks would be, so we avoid generating on top of them
+                for (int yOffset = 0; yOffset <= 10; yOffset++)
+                {
+                    BlockPos checkPos = pos.add(x, yOffset, z);
+                    Block block = world.getBlockState(checkPos).getBlock();
+                    
+                    // If we find a log block (any type of log) at trunk height, this position is too close
+                    if (block instanceof net.minecraft.block.BlockLog)
+                    {
+                        return false;
+                    }
+                }
             }
         }
         
