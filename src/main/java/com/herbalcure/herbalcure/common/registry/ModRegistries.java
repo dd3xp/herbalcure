@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.herbalcure.herbalcure.HerbalCure;
 import com.herbalcure.herbalcure.common.block.BlockJungleHeartwoodLog;
 import com.herbalcure.herbalcure.common.block.BlockJungleHeartwoodLeaves;
+import com.herbalcure.herbalcure.common.block.BlockJungleHeartwoodSapling;
 
 /**
  * Mod registry manager
@@ -28,6 +29,7 @@ public class ModRegistries
      */
     public static BlockJungleHeartwoodLog blockJungleHeartwoodLog;
     public static BlockJungleHeartwoodLeaves blockJungleHeartwoodLeaves;
+    public static BlockJungleHeartwoodSapling blockJungleHeartwoodSapling;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -49,6 +51,13 @@ public class ModRegistries
         blockJungleHeartwoodLeaves.setUnlocalizedName("jungle_heartwood_leaves");
         blockJungleHeartwoodLeaves.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockJungleHeartwoodLeaves);
+        
+        // Register Jungle Heartwood Sapling
+        blockJungleHeartwoodSapling = new BlockJungleHeartwoodSapling();
+        blockJungleHeartwoodSapling.setRegistryName("jungle_heartwood_sapling");
+        blockJungleHeartwoodSapling.setUnlocalizedName("jungle_heartwood_sapling");
+        blockJungleHeartwoodSapling.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockJungleHeartwoodSapling);
         
         HerbalCure.getLogger().info("Blocks registered!");
     }
@@ -81,6 +90,16 @@ public class ModRegistries
             ItemBlock itemBlock = new ItemBlock(blockJungleHeartwoodLeaves);
             itemBlock.setRegistryName(blockJungleHeartwoodLeaves.getRegistryName());
             itemBlock.setUnlocalizedName(blockJungleHeartwoodLeaves.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Jungle Heartwood Sapling
+        if (blockJungleHeartwoodSapling != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockJungleHeartwoodSapling);
+            itemBlock.setRegistryName(blockJungleHeartwoodSapling.getRegistryName());
+            itemBlock.setUnlocalizedName(blockJungleHeartwoodSapling.getUnlocalizedName());
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }

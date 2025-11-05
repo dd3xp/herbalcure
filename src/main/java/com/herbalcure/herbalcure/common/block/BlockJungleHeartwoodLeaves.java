@@ -1,5 +1,6 @@
 package com.herbalcure.herbalcure.common.block;
 
+import com.herbalcure.herbalcure.common.registry.ModRegistries;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -72,6 +73,11 @@ public class BlockJungleHeartwoodLeaves extends BlockLeaves
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
+        // Drop Jungle Heartwood Sapling instead of vanilla sapling
+        if (ModRegistries.blockJungleHeartwoodSapling != null)
+        {
+            return Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodSapling);
+        }
         return Item.getItemFromBlock(net.minecraft.init.Blocks.SAPLING);
     }
 

@@ -4,6 +4,7 @@ import com.herbalcure.herbalcure.client.handler.BlockColorHandler;
 import com.herbalcure.herbalcure.common.proxy.CommonProxy;
 import com.herbalcure.herbalcure.common.registry.ModRegistries;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
@@ -91,6 +92,24 @@ public class ClientProxy extends CommonProxy
                     new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
                 );
             }
+        }
+        
+        // Register model for Jungle Heartwood Sapling ItemBlock (same as Log and Leaves)
+        if (ModRegistries.blockJungleHeartwoodSapling != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodSapling);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+            // Register block state mapper to ignore TYPE property
+            StateMap.Builder stateMapBuilder = new StateMap.Builder();
+            stateMapBuilder.ignore(net.minecraft.block.BlockSapling.TYPE);
+            ModelLoader.setCustomStateMapper(ModRegistries.blockJungleHeartwoodSapling, stateMapBuilder.build());
         }
     }
 }

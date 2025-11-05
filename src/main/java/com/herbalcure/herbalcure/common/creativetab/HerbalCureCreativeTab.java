@@ -4,6 +4,7 @@ import com.herbalcure.herbalcure.HerbalCure;
 import com.herbalcure.herbalcure.common.registry.ModRegistries;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 /**
  * Custom creative tab for HerbalCure mod
@@ -33,5 +34,6 @@ public class HerbalCureCreativeTab extends CreativeTabs
     {
         return HerbalCure.NAME;
     }
+
 }
 
