@@ -42,12 +42,17 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 2);
     // Collision boxes for hanging berry bush (hangs from leaves above)
-    // Stage 0: small, hangs down 0.5 blocks from top
-    protected static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.25D, 0.5D, 0.25D, 0.75D, 1.0D, 0.75D);
-    // Stage 1: medium, hangs down 0.75 blocks from top
-    protected static final AxisAlignedBB GROWING_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 1.0D, 0.75D);
-    // Stage 2: mature, hangs down 1.0 block from top (full block)
-    protected static final AxisAlignedBB MATURE_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
+    // All stages have full height (0.0 to 1.0), only width/length varies
+    // Stage 0: width/length: 0.5 blocks (0.25-0.75)
+    protected static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
+    // Stage 1: width/length: 0.75 blocks (0.125-0.875)
+    protected static final AxisAlignedBB GROWING_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
+    // Stage 2: width/length: 0.85 blocks (0.075-0.925)
+    protected static final AxisAlignedBB MATURE_AABB = new AxisAlignedBB(0.075D, 0.0D, 0.075D, 0.925D, 1.0D, 0.925D);
+    
+    // Unified bounding box for crosshair targeting (all stages use this)
+    // Full height (0.0 to 1.0) but same width/length (0.25 to 0.75)
+    protected static final AxisAlignedBB UNIFIED_TARGET_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
 
     public BlockForestBerryBush()
     {
@@ -77,6 +82,12 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
         return ((Integer)state.getValue(AGE)).intValue();
     }
 
+    /**
+     * Bounding box for crosshair targeting - varies by stage
+     * Full height (0.0 to 1.0) but width/length increases with stage
+     * Returns relative box (0-1 range), Minecraft will add pos offset automatically
+     * Stage 0: 0.5 blocks, Stage 1: 0.75 blocks, Stage 2: 0.85 blocks
+     */
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
@@ -92,6 +103,52 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
         else
         {
             return MATURE_AABB;
+        }
+    }
+
+    /**
+     * Collision bounding box - actual collision detection, varies by stage
+     * Stage 2 is slightly larger in width/length than stage 1
+     * Returns absolute box (with pos offset)
+     */
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        int age = ((Integer)state.getValue(AGE)).intValue();
+        if (age == 0)
+        {
+            return BUSH_AABB.offset(pos);
+        }
+        else if (age == 1)
+        {
+            return GROWING_AABB.offset(pos);
+        }
+        else
+        {
+            return MATURE_AABB.offset(pos);
+        }
+    }
+
+    /**
+     * Selected bounding box - same as crosshair targeting box, varies by stage
+     * Returns absolute box (with pos offset)
+     * Stage 0: 0.5 blocks, Stage 1: 0.75 blocks, Stage 2: 0.85 blocks
+     */
+    @Override
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+    {
+        int age = ((Integer)state.getValue(AGE)).intValue();
+        if (age == 0)
+        {
+            return BUSH_AABB.offset(pos);
+        }
+        else if (age == 1)
+        {
+            return GROWING_AABB.offset(pos);
+        }
+        else
+        {
+            return MATURE_AABB.offset(pos);
         }
     }
 
