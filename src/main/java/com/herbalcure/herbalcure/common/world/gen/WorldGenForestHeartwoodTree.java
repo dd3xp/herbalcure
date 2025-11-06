@@ -3,12 +3,15 @@ package com.herbalcure.herbalcure.common.world.gen;
 import com.herbalcure.herbalcure.common.registry.ModRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -87,6 +90,9 @@ public class WorldGenForestHeartwoodTree extends WorldGenAbstractTree
             IBlockState leavesState = ModRegistries.blockForestHeartwoodLeaves.getDefaultState()
                 .withProperty(net.minecraft.block.BlockLeaves.DECAYABLE, Boolean.valueOf(true))
                 .withProperty(net.minecraft.block.BlockLeaves.CHECK_DECAY, Boolean.valueOf(true));
+            
+            // List to store all leaf positions for berry bush generation
+            List<BlockPos> leafPositions = new ArrayList<BlockPos>();
 
             // Place trunk logs
             for (int y = 0; y < trunkHeight; ++y)
@@ -103,15 +109,15 @@ public class WorldGenForestHeartwoodTree extends WorldGenAbstractTree
             // Place leaves from top to bottom
             // Top layer (layer 0) - only center leaf
             BlockPos topLayerPos = position.up(trunkHeight + totalLeavesLayers - 1);
-            this.placeLeavesAt(worldIn, topLayerPos, leavesState);
+            this.placeLeavesAt(worldIn, topLayerPos, leavesState, leafPositions);
 
             // Second layer (layer 1) - cross pattern
             BlockPos secondLayerPos = position.up(trunkHeight + totalLeavesLayers - 2);
-            this.placeLeavesAt(worldIn, secondLayerPos.add(0, 0, 0), leavesState); // Center (will be replaced by log)
-            this.placeLeavesAt(worldIn, secondLayerPos.add(-1, 0, 0), leavesState);
-            this.placeLeavesAt(worldIn, secondLayerPos.add(1, 0, 0), leavesState);
-            this.placeLeavesAt(worldIn, secondLayerPos.add(0, 0, -1), leavesState);
-            this.placeLeavesAt(worldIn, secondLayerPos.add(0, 0, 1), leavesState);
+            this.placeLeavesAt(worldIn, secondLayerPos.add(0, 0, 0), leavesState, leafPositions); // Center (will be replaced by log)
+            this.placeLeavesAt(worldIn, secondLayerPos.add(-1, 0, 0), leavesState, leafPositions);
+            this.placeLeavesAt(worldIn, secondLayerPos.add(1, 0, 0), leavesState, leafPositions);
+            this.placeLeavesAt(worldIn, secondLayerPos.add(0, 0, -1), leavesState, leafPositions);
+            this.placeLeavesAt(worldIn, secondLayerPos.add(0, 0, 1), leavesState, leafPositions);
             // Place log in center
             this.setBlockAndNotifyAdequately(worldIn, secondLayerPos, logState);
 
@@ -120,23 +126,23 @@ public class WorldGenForestHeartwoodTree extends WorldGenAbstractTree
                 BlockPos layerPos = position.up((trunkHeight + totalLeavesLayers - 3) - layer);
                 
                 // Center cross (will be replaced by log in center)
-                this.placeLeavesAt(worldIn, layerPos.add(0, 0, 0), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(-1, 0, 0), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(1, 0, 0), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(0, 0, -1), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(0, 0, 1), leavesState);
+                this.placeLeavesAt(worldIn, layerPos.add(0, 0, 0), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(-1, 0, 0), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(1, 0, 0), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(0, 0, -1), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(0, 0, 1), leavesState, leafPositions);
                 
                 // Outer corners
-                this.placeLeavesAt(worldIn, layerPos.add(-2, 0, 0), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(2, 0, 0), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(0, 0, -2), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(0, 0, 2), leavesState);
+                this.placeLeavesAt(worldIn, layerPos.add(-2, 0, 0), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(2, 0, 0), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(0, 0, -2), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(0, 0, 2), leavesState, leafPositions);
                 
                 // Diagonal leaves
-                this.placeLeavesAt(worldIn, layerPos.add(-1, 0, -1), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(1, 0, -1), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(-1, 0, 1), leavesState);
-                this.placeLeavesAt(worldIn, layerPos.add(1, 0, 1), leavesState);
+                this.placeLeavesAt(worldIn, layerPos.add(-1, 0, -1), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(1, 0, -1), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(-1, 0, 1), leavesState, leafPositions);
+                this.placeLeavesAt(worldIn, layerPos.add(1, 0, 1), leavesState, leafPositions);
                 
                 // Place log in center
                 this.setBlockAndNotifyAdequately(worldIn, layerPos, logState);
@@ -147,6 +153,44 @@ public class WorldGenForestHeartwoodTree extends WorldGenAbstractTree
             BlockPos bottomLayerPos = position.up(trunkHeight);
             this.setBlockAndNotifyAdequately(worldIn, bottomLayerPos, logState);
 
+            // Generate berry bushes under leaves (50% chance, 1-3 bushes)
+            if (ModRegistries.blockForestBerryBush != null && !leafPositions.isEmpty())
+            {
+                if (rand.nextFloat() < 0.5f) // 50% chance
+                {
+                    int berryCount = rand.nextInt(3) + 1; // 1-3 bushes
+                    berryCount = Math.min(berryCount, leafPositions.size()); // Don't exceed available leaves
+                    
+                    // Shuffle the list to randomly select positions
+                    List<BlockPos> shuffledLeaves = new ArrayList<BlockPos>(leafPositions);
+                    java.util.Collections.shuffle(shuffledLeaves, rand);
+                    
+                    int placedCount = 0;
+                    for (BlockPos leafPos : shuffledLeaves)
+                    {
+                        if (placedCount >= berryCount)
+                        {
+                            break;
+                        }
+                        
+                        BlockPos berryPos = leafPos.down();
+                        IBlockState berryState = worldIn.getBlockState(berryPos);
+                        
+                        // Check if position is valid for berry bush (air or replaceable)
+                        if ((berryState.getBlock().isAir(berryState, worldIn, berryPos) || 
+                             berryState.getBlock().isReplaceable(worldIn, berryPos)) &&
+                            ModRegistries.blockForestBerryBush.canPlaceBlockAt(worldIn, berryPos))
+                        {
+                            // Place mature berry bush (age = 2)
+                            IBlockState matureBerryState = ModRegistries.blockForestBerryBush.getDefaultState()
+                                .withProperty(com.herbalcure.herbalcure.common.block.BlockForestBerryBush.AGE, Integer.valueOf(2));
+                            this.setBlockAndNotifyAdequately(worldIn, berryPos, matureBerryState);
+                            placedCount++;
+                        }
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -155,15 +199,29 @@ public class WorldGenForestHeartwoodTree extends WorldGenAbstractTree
 
     /**
      * Place leaves at position if the block is air or leaves
+     * Also adds the position to the leafPositions list for berry bush generation
      */
-    private void placeLeavesAt(World worldIn, BlockPos pos, IBlockState leavesState)
+    private void placeLeavesAt(World worldIn, BlockPos pos, IBlockState leavesState, List<BlockPos> leafPositions)
     {
         IBlockState state = worldIn.getBlockState(pos);
         if (state.getBlock().isAir(state, worldIn, pos) || 
             state.getBlock().isLeaves(state, worldIn, pos))
         {
             this.setBlockAndNotifyAdequately(worldIn, pos, leavesState);
+            // Add to list for berry bush generation
+            if (leafPositions != null)
+            {
+                leafPositions.add(pos);
+            }
         }
+    }
+    
+    /**
+     * Overloaded method for backward compatibility (without leafPositions list)
+     */
+    private void placeLeavesAt(World worldIn, BlockPos pos, IBlockState leavesState)
+    {
+        placeLeavesAt(worldIn, pos, leavesState, null);
     }
 
     /**

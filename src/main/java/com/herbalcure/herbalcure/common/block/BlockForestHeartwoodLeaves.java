@@ -175,5 +175,47 @@ public class BlockForestHeartwoodLeaves extends BlockLeaves
         // Set manually placed leaves to not decay
         worldIn.setBlockState(pos, state.withProperty(DECAYABLE, Boolean.valueOf(false)).withProperty(CHECK_DECAY, Boolean.valueOf(false)), 4);
     }
+
+    /**
+     * Called when the block is broken
+     * Check if there's a berry bush below and make it drop items
+     */
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        if (!worldIn.isRemote)
+        {
+            // Check if there's a berry bush below
+            BlockPos downPos = pos.down();
+            IBlockState downState = worldIn.getBlockState(downPos);
+            
+            if (downState.getBlock() == ModRegistries.blockForestBerryBush)
+            {
+                // Get the berry bush's age
+                int age = ((Integer)downState.getValue(com.herbalcure.herbalcure.common.block.BlockForestBerryBush.AGE)).intValue();
+                
+                // Drop items based on age (same as breaking the bush)
+                if (ModRegistries.itemForestBerry != null)
+                {
+                    if (age >= 2)
+                    {
+                        // Mature stage (age 2): drop 1-2 berries
+                        int dropCount = 1 + worldIn.rand.nextInt(2); // 1-2 berries
+                        spawnAsEntity(worldIn, downPos, new ItemStack(ModRegistries.itemForestBerry, dropCount));
+                    }
+                    else
+                    {
+                        // Stage 0 and 1: drop 1 berry
+                        spawnAsEntity(worldIn, downPos, new ItemStack(ModRegistries.itemForestBerry, 1));
+                    }
+                }
+                
+                // Remove the berry bush
+                worldIn.setBlockState(downPos, Blocks.AIR.getDefaultState(), 3);
+            }
+        }
+        
+        super.breakBlock(worldIn, pos, state);
+    }
 }
 

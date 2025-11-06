@@ -127,7 +127,21 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
             IBlockState upState = worldIn.getBlockState(upPos);
             if (upState.getBlock() != ModRegistries.blockForestHeartwoodLeaves)
             {
-                // If leaves are gone, break the bush
+                // If leaves are gone, drop items and break the bush
+                if (ModRegistries.itemForestBerry != null)
+                {
+                    if (age >= 2)
+                    {
+                        // Mature stage (age 2): drop 1-2 berries
+                        int dropCount = 1 + worldIn.rand.nextInt(2); // 1-2 berries
+                        spawnAsEntity(worldIn, pos, new ItemStack(ModRegistries.itemForestBerry, dropCount));
+                    }
+                    else
+                    {
+                        // Stage 0 and 1: drop 1 berry
+                        spawnAsEntity(worldIn, pos, new ItemStack(ModRegistries.itemForestBerry, 1));
+                    }
+                }
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
                 return;
             }
@@ -189,8 +203,8 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
                 int dropCount = worldIn.rand.nextInt(2) + 1; // 1-2 berries
                 spawnAsEntity(worldIn, pos, new ItemStack(ModRegistries.itemForestBerry, dropCount));
                 
-                // Reset to stage 1 (one stage back)
-                worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(1)), 2);
+                // Reset to stage 0 (first stage)
+                worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 2);
             }
             
             return true;
@@ -204,10 +218,19 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
     {
         int age = ((Integer)state.getValue(AGE)).intValue();
         
-        if (age >= 2 && ModRegistries.itemForestBerry != null)
+        if (ModRegistries.itemForestBerry != null)
         {
-            int dropCount = 1 + ((World)world).rand.nextInt(2); // 1-2 berries
-            drops.add(new ItemStack(ModRegistries.itemForestBerry, dropCount));
+            if (age >= 2)
+            {
+                // Mature stage (age 2): drop 1-2 berries
+                int dropCount = 1 + ((World)world).rand.nextInt(2); // 1-2 berries
+                drops.add(new ItemStack(ModRegistries.itemForestBerry, dropCount));
+            }
+            else
+            {
+                // Stage 0 and 1: drop 1 berry (because it was planted with 1 berry)
+                drops.add(new ItemStack(ModRegistries.itemForestBerry, 1));
+            }
         }
     }
 
