@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "herbalcure:blocks/jungle_heartwood_sapling"
-    }
-}
-

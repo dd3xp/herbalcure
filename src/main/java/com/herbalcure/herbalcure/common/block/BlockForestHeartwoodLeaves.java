@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Jungle Heartwood Leaves block
+ * Forest Heartwood Leaves block
  * Similar to vanilla leaves blocks, but with different texture
  */
-public class BlockJungleHeartwoodLeaves extends BlockLeaves
+public class BlockForestHeartwoodLeaves extends BlockLeaves
 {
-    public BlockJungleHeartwoodLeaves()
+    public BlockForestHeartwoodLeaves()
     {
         super();
         setHardness(0.2F);
@@ -73,12 +73,67 @@ public class BlockJungleHeartwoodLeaves extends BlockLeaves
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        // Drop Jungle Heartwood Sapling instead of vanilla sapling
-        if (ModRegistries.blockJungleHeartwoodSapling != null)
+        // Drop Forest Heartwood Sapling instead of vanilla sapling
+        if (ModRegistries.blockForestHeartwoodSapling != null)
         {
-            return Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodSapling);
+            return Item.getItemFromBlock(ModRegistries.blockForestHeartwoodSapling);
         }
         return Item.getItemFromBlock(net.minecraft.init.Blocks.SAPLING);
+    }
+
+    /**
+     * Called when the block is broken or decayed
+     * Adds Forest Berry to the drop list with a chance lower than apple (1/300 vs 1/200 for apple)
+     */
+    @Override
+    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        Random rand = world instanceof World ? ((World)world).rand : new Random();
+        
+        // Drop sapling (base class handles this)
+        super.getDrops(drops, world, pos, state, fortune);
+        
+        // Drop Forest Berry with lower probability than apple (1/300 vs 1/200)
+        // Fortune increases drop chance
+        int chance = 300;
+        if (fortune > 0)
+        {
+            chance -= 20 * fortune; // Fortune reduces chance (e.g., Fortune I: 280, Fortune II: 260, Fortune III: 240)
+            if (chance < 50) chance = 50; // Minimum chance is 1/50
+        }
+        
+        if (rand.nextInt(chance) == 0 && ModRegistries.itemForestBerry != null)
+        {
+            drops.add(new ItemStack(ModRegistries.itemForestBerry, 1));
+        }
+    }
+
+    /**
+     * Called when the block decays naturally
+     * Also drops Forest Berry with chance (lower than apple)
+     */
+    @Override
+    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    {
+        if (!worldIn.isRemote)
+        {
+            // Drop sapling (base class handles this)
+            super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
+            
+            // Drop Forest Berry with chance (1/300, lower than apple's 1/200)
+            Random rand = worldIn.rand;
+            int berryChance = 300;
+            if (fortune > 0)
+            {
+                berryChance -= 20 * fortune;
+                if (berryChance < 50) berryChance = 50;
+            }
+            
+            if (rand.nextInt(berryChance) == 0 && ModRegistries.itemForestBerry != null)
+            {
+                spawnAsEntity(worldIn, pos, new ItemStack(ModRegistries.itemForestBerry, 1));
+            }
+        }
     }
 
     @Override

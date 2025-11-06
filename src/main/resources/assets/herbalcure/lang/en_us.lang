@@ -4,10 +4,11 @@
 # Use snake_case for keys (lowercase with underscores)
 
 # Blocks
-tile.jungle_heartwood_log.name=Jungle Heartwood Log
-tile.jungle_heartwood_leaves.name=Jungle Heartwood Leaves
-tile.jungle_heartwood_sapling.name=Jungle Heartwood Sapling
+tile.forest_heartwood_log.name=Forest Heartwood Log
+tile.forest_heartwood_leaves.name=Forest Heartwood Leaves
+tile.forest_heartwood_sapling.name=Forest Heartwood Sapling
 
 # Items
-item.jungle_heartwood_sapling.name=Jungle Heartwood Sapling
+item.forest_heartwood_sapling.name=Forest Heartwood Sapling
+item.forest_berry.name=Forest Berry
 

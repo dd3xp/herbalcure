@@ -12,12 +12,12 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import java.util.Random;
 
 /**
- * World generator for Jungle Heartwood Tree
- * Generates a tree structure using Jungle Heartwood Log and Jungle Heartwood Leaves
+ * World generator for Forest Heartwood Tree
+ * Generates a tree structure using Forest Heartwood Log and Forest Heartwood Leaves
  */
-public class WorldGenJungleHeartwoodTree extends WorldGenAbstractTree
+public class WorldGenForestHeartwoodTree extends WorldGenAbstractTree
 {
-    public WorldGenJungleHeartwoodTree(boolean notify)
+    public WorldGenForestHeartwoodTree(boolean notify)
     {
         super(notify);
     }
@@ -26,7 +26,7 @@ public class WorldGenJungleHeartwoodTree extends WorldGenAbstractTree
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
         // Random tree parameters
-        int trunkHeight = rand.nextInt(3) + 4; // Trunk height: 4-6 blocks (random)
+        int trunkHeight = rand.nextInt(2) + 4; // Trunk height: 4-5 blocks (random)
         int middleLeavesLayers = rand.nextFloat() < 0.5f ? 3 : 4; // 50% chance: 3-5 layers or 3-6 layers (3 or 4 middle layers)
         
         // Tree structure: trunk + 1 (top) + middle layers + 1 (bottom log) = total leaves layers
@@ -77,14 +77,14 @@ public class WorldGenJungleHeartwoodTree extends WorldGenAbstractTree
             }
 
             // Generate the tree
-            if (ModRegistries.blockJungleHeartwoodLog == null || ModRegistries.blockJungleHeartwoodLeaves == null)
+            if (ModRegistries.blockForestHeartwoodLog == null || ModRegistries.blockForestHeartwoodLeaves == null)
             {
                 return false;
             }
             
-            IBlockState logState = ModRegistries.blockJungleHeartwoodLog.getDefaultState()
+            IBlockState logState = ModRegistries.blockForestHeartwoodLog.getDefaultState()
                 .withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
-            IBlockState leavesState = ModRegistries.blockJungleHeartwoodLeaves.getDefaultState()
+            IBlockState leavesState = ModRegistries.blockForestHeartwoodLeaves.getDefaultState()
                 .withProperty(net.minecraft.block.BlockLeaves.DECAYABLE, Boolean.valueOf(true))
                 .withProperty(net.minecraft.block.BlockLeaves.CHECK_DECAY, Boolean.valueOf(true));
 

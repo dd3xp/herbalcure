@@ -7,12 +7,12 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
 /**
- * Jungle Heartwood Log block
+ * Forest Heartwood Log block
  * Similar to vanilla log blocks, but with different texture
  */
-public class BlockJungleHeartwoodLog extends BlockLog
+public class BlockForestHeartwoodLog extends BlockLog
 {
-    public BlockJungleHeartwoodLog()
+    public BlockForestHeartwoodLog()
     {
         super();
         setHardness(2.0F);

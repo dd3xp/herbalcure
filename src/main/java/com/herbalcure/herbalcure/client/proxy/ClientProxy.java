@@ -42,9 +42,9 @@ public class ClientProxy extends CommonProxy
         
         // Register item color handlers for inventory/hand rendering
         ItemColors itemColors = net.minecraft.client.Minecraft.getMinecraft().getItemColors();
-        if (ModRegistries.blockJungleHeartwoodLeaves != null)
+        if (ModRegistries.blockForestHeartwoodLeaves != null)
         {
-            ItemBlock itemBlock = (ItemBlock)Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodLeaves);
+            ItemBlock itemBlock = (ItemBlock)Item.getItemFromBlock(ModRegistries.blockForestHeartwoodLeaves);
             if (itemBlock != null)
             {
                 itemColors.registerItemColorHandler(BlockColorHandler.LEAVES_ITEM_COLOR, itemBlock);
@@ -66,10 +66,10 @@ public class ClientProxy extends CommonProxy
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event)
     {
-        // Register model for Jungle Heartwood Log ItemBlock
-        if (ModRegistries.blockJungleHeartwoodLog != null)
+        // Register model for Forest Heartwood Log ItemBlock
+        if (ModRegistries.blockForestHeartwoodLog != null)
         {
-            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodLog);
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockForestHeartwoodLog);
             if (itemBlock != null)
             {
                 ModelLoader.setCustomModelResourceLocation(
@@ -80,10 +80,10 @@ public class ClientProxy extends CommonProxy
             }
         }
         
-        // Register model for Jungle Heartwood Leaves ItemBlock
-        if (ModRegistries.blockJungleHeartwoodLeaves != null)
+        // Register model for Forest Heartwood Leaves ItemBlock
+        if (ModRegistries.blockForestHeartwoodLeaves != null)
         {
-            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodLeaves);
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockForestHeartwoodLeaves);
             if (itemBlock != null)
             {
                 ModelLoader.setCustomModelResourceLocation(
@@ -94,10 +94,10 @@ public class ClientProxy extends CommonProxy
             }
         }
         
-        // Register model for Jungle Heartwood Sapling ItemBlock (same as Log and Leaves)
-        if (ModRegistries.blockJungleHeartwoodSapling != null)
+        // Register model for Forest Heartwood Sapling ItemBlock (same as Log and Leaves)
+        if (ModRegistries.blockForestHeartwoodSapling != null)
         {
-            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockJungleHeartwoodSapling);
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockForestHeartwoodSapling);
             if (itemBlock != null)
             {
                 ModelLoader.setCustomModelResourceLocation(
@@ -109,7 +109,17 @@ public class ClientProxy extends CommonProxy
             // Register block state mapper to ignore TYPE property
             StateMap.Builder stateMapBuilder = new StateMap.Builder();
             stateMapBuilder.ignore(net.minecraft.block.BlockSapling.TYPE);
-            ModelLoader.setCustomStateMapper(ModRegistries.blockJungleHeartwoodSapling, stateMapBuilder.build());
+            ModelLoader.setCustomStateMapper(ModRegistries.blockForestHeartwoodSapling, stateMapBuilder.build());
+        }
+        
+        // Register model for Forest Berry
+        if (ModRegistries.itemForestBerry != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemForestBerry,
+                0,
+                new ModelResourceLocation(ModRegistries.itemForestBerry.getRegistryName(), "inventory")
+            );
         }
     }
 }

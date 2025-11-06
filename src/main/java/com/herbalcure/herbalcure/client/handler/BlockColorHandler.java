@@ -67,9 +67,9 @@ public class BlockColorHandler
     public static void registerBlockColorHandlers(BlockColors blockColors)
     {
         // Register leaves color handler
-        if (ModRegistries.blockJungleHeartwoodLeaves != null)
+        if (ModRegistries.blockForestHeartwoodLeaves != null)
         {
-            blockColors.registerBlockColorHandler(LEAVES_COLOR, ModRegistries.blockJungleHeartwoodLeaves);
+            blockColors.registerBlockColorHandler(LEAVES_COLOR, ModRegistries.blockForestHeartwoodLeaves);
         }
     }
 }

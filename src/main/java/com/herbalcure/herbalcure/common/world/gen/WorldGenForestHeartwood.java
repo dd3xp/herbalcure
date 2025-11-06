@@ -14,17 +14,17 @@ import net.minecraftforge.common.BiomeDictionary;
 import java.util.Random;
 
 /**
- * World generator for Jungle Heartwood trees in forest biomes
+ * World generator for Forest Heartwood trees in forest biomes
  * Generates trees naturally in forest-related biomes during world generation
  */
-public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IWorldGenerator
+public class WorldGenForestHeartwood implements net.minecraftforge.fml.common.IWorldGenerator
 {
     private WorldGenerator treeGenerator;
 
-    public WorldGenJungleHeartwood()
+    public WorldGenForestHeartwood()
     {
         // Create tree generator instance
-        this.treeGenerator = new WorldGenJungleHeartwoodTree(true);
+        this.treeGenerator = new WorldGenForestHeartwoodTree(true);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
 
     /**
      * Check if biome is forest-related
-     * Includes: FOREST, BIRCH_FOREST, ROOFED_FOREST, TAIGA, JUNGLE, etc.
+     * Includes: FOREST, BIRCH_FOREST, ROOFED_FOREST, TAIGA, COLD_TAIGA, JUNGLE, etc.
      */
     private boolean isForestBiome(Biome biome)
     {
@@ -92,12 +92,14 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
                BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE) ||
                BiomeDictionary.hasType(biome, BiomeDictionary.Type.CONIFEROUS) ||
                BiomeDictionary.hasType(biome, BiomeDictionary.Type.SPOOKY) ||
-               BiomeDictionary.hasType(biome, BiomeDictionary.Type.DENSE);
+               BiomeDictionary.hasType(biome, BiomeDictionary.Type.DENSE) ||
+               BiomeDictionary.hasType(biome, BiomeDictionary.Type.COLD);
     }
 
     /**
      * Find suitable ground level for tree generation
      * Returns the Y coordinate of the first solid block with grass or dirt on top
+     * Handles snow-covered ground (like in cold taiga)
      */
     private int findGroundLevel(World world, int x, int z)
     {
@@ -109,16 +111,37 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
             BlockPos pos = new BlockPos(x, y, z);
             Block block = world.getBlockState(pos).getBlock();
             
-            // Check if we have grass or dirt
+            // Check if we have grass or dirt (including snow-covered ground)
             if (block == Blocks.GRASS || block == Blocks.DIRT)
             {
-                // Check if there's air or leaves above
+                // Check if there's air, leaves, or snow above
                 BlockPos posAbove = pos.up();
                 Block blockAbove = world.getBlockState(posAbove).getBlock();
                 
-                if (blockAbove == Blocks.AIR || blockAbove.isLeaves(world.getBlockState(posAbove), world, posAbove))
+                if (blockAbove == Blocks.AIR || 
+                    blockAbove.isLeaves(world.getBlockState(posAbove), world, posAbove) ||
+                    blockAbove == Blocks.SNOW_LAYER || 
+                    blockAbove == Blocks.SNOW)
                 {
-                    return y + 1; // Return the Y position above ground
+                    return y + 1; // Return the Y position above ground (or snow)
+                }
+            }
+            // Also check if we have snow layer on top of grass/dirt
+            else if (block == Blocks.SNOW_LAYER || block == Blocks.SNOW)
+            {
+                // Check block below snow
+                BlockPos posBelow = pos.down();
+                Block blockBelow = world.getBlockState(posBelow).getBlock();
+                if (blockBelow == Blocks.GRASS || blockBelow == Blocks.DIRT)
+                {
+                    // Check if there's air or leaves above snow
+                    BlockPos posAbove = pos.up();
+                    Block blockAbove = world.getBlockState(posAbove).getBlock();
+                    if (blockAbove == Blocks.AIR || 
+                        blockAbove.isLeaves(world.getBlockState(posAbove), world, posAbove))
+                    {
+                        return y + 1; // Return the Y position above snow
+                    }
                 }
             }
         }
@@ -129,16 +152,32 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
     /**
      * Check if position is suitable for tree generation
      * Ensures there's enough space and proper ground, and not too close to other trees
+     * Handles snow-covered ground (like in cold taiga)
      */
     private boolean isSuitablePosition(World world, BlockPos pos)
     {
-        // Check ground block
+        // Check ground block (may be snow in cold biomes)
         BlockPos groundPos = pos.down();
         Block groundBlock = world.getBlockState(groundPos).getBlock();
         
-        if (groundBlock != Blocks.GRASS && groundBlock != Blocks.DIRT)
+        // Allow grass, dirt, or snow layer
+        if (groundBlock != Blocks.GRASS && 
+            groundBlock != Blocks.DIRT && 
+            groundBlock != Blocks.SNOW_LAYER && 
+            groundBlock != Blocks.SNOW)
         {
             return false;
+        }
+        
+        // If ground is snow, check if there's grass/dirt below
+        if (groundBlock == Blocks.SNOW_LAYER || groundBlock == Blocks.SNOW)
+        {
+            BlockPos belowPos = groundPos.down();
+            Block belowBlock = world.getBlockState(belowPos).getBlock();
+            if (belowBlock != Blocks.GRASS && belowBlock != Blocks.DIRT)
+            {
+                return false;
+            }
         }
         
         // Check if there's enough space above (at least 10 blocks)
@@ -159,12 +198,10 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
         }
         
         // Check if there are other tree trunks nearby - keep at least 4 blocks away
-        // Similar to IC2 rubber trees and Thaumcraft silverwood - only check for nearby logs
         // This prevents trees from generating inside other trees, but allows reasonable spacing
         int checkRadius = 4; // Minimum distance from other tree trunks (horizontal)
         
         // Only check ground level and a few blocks above for logs (trunks)
-        // This is more efficient and matches how other mods handle tree generation
         for (int x = -checkRadius; x <= checkRadius; x++)
         {
             for (int z = -checkRadius; z <= checkRadius; z++)
@@ -183,7 +220,6 @@ public class WorldGenJungleHeartwood implements net.minecraftforge.fml.common.IW
                 }
                 
                 // Check ground level and up to 10 blocks above for logs (trunk area)
-                // This is where tree trunks would be, so we avoid generating on top of them
                 for (int yOffset = 0; yOffset <= 10; yOffset++)
                 {
                     BlockPos checkPos = pos.add(x, yOffset, z);

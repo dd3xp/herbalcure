@@ -1,7 +1,7 @@
 package com.herbalcure.herbalcure.common.proxy;
 
 import com.herbalcure.herbalcure.HerbalCure;
-import com.herbalcure.herbalcure.common.world.gen.WorldGenJungleHeartwood;
+import com.herbalcure.herbalcure.common.world.gen.WorldGenForestHeartwood;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -25,9 +25,9 @@ public class CommonProxy
      */
     public void init(FMLInitializationEvent event)
     {
-        // Register world generator for Jungle Heartwood trees
-        HerbalCure.getLogger().info("Registering world generator for Jungle Heartwood trees...");
-        GameRegistry.registerWorldGenerator(new WorldGenJungleHeartwood(), 10); // Priority 10 (higher = later)
+        // Register world generator for Forest Heartwood trees
+        HerbalCure.getLogger().info("Registering world generator for Forest Heartwood trees...");
+        GameRegistry.registerWorldGenerator(new WorldGenForestHeartwood(), 10); // Priority 10 (higher = later)
         HerbalCure.getLogger().info("World generator registered!");
     }
 

@@ -1,7 +1,7 @@
 {
     "parent": "block/leaves",
     "textures": {
-        "all": "herbalcure:blocks/jungle_heartwood_leaves"
+        "all": "herbalcure:blocks/forest_heartwood_leaves"
     }
 }
 

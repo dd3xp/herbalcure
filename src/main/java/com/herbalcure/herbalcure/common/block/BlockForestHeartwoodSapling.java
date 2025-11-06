@@ -1,7 +1,7 @@
 package com.herbalcure.herbalcure.common.block;
 
 import com.herbalcure.herbalcure.HerbalCure;
-import com.herbalcure.herbalcure.common.world.gen.WorldGenJungleHeartwoodTree;
+import com.herbalcure.herbalcure.common.world.gen.WorldGenForestHeartwoodTree;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -19,12 +19,12 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.Random;
 
 /**
- * Jungle Heartwood Sapling block
- * Grows into a tree made of Jungle Heartwood Log and Jungle Heartwood Leaves
+ * Forest Heartwood Sapling block
+ * Grows into a tree made of Forest Heartwood Log and Forest Heartwood Leaves
  */
-public class BlockJungleHeartwoodSapling extends BlockSapling
+public class BlockForestHeartwoodSapling extends BlockSapling
 {
-    public BlockJungleHeartwoodSapling()
+    public BlockForestHeartwoodSapling()
     {
         super();
         setHardness(0.0F);
@@ -103,7 +103,7 @@ public class BlockJungleHeartwoodSapling extends BlockSapling
             return;
         }
 
-        WorldGenerator treeGenerator = new WorldGenJungleHeartwoodTree(true);
+        WorldGenerator treeGenerator = new WorldGenForestHeartwoodTree(true);
 
         // Clear the sapling block
         worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);

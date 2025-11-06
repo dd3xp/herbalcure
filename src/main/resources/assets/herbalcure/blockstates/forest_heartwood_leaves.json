@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "check_decay=false,decayable=false": { "model": "herbalcure:forest_heartwood_leaves" },
+        "check_decay=false,decayable=true": { "model": "herbalcure:forest_heartwood_leaves" },
+        "check_decay=true,decayable=false": { "model": "herbalcure:forest_heartwood_leaves" },
+        "check_decay=true,decayable=true": { "model": "herbalcure:forest_heartwood_leaves" }
+    }
+}
+
