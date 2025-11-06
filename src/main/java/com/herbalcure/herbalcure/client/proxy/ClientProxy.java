@@ -50,6 +50,16 @@ public class ClientProxy extends CommonProxy
                 itemColors.registerItemColorHandler(BlockColorHandler.LEAVES_ITEM_COLOR, itemBlock);
             }
         }
+        
+        // Register berry bush item color handler (uses same color as leaves)
+        if (ModRegistries.blockForestBerryBush != null)
+        {
+            ItemBlock itemBlock = (ItemBlock)Item.getItemFromBlock(ModRegistries.blockForestBerryBush);
+            if (itemBlock != null)
+            {
+                itemColors.registerItemColorHandler(BlockColorHandler.LEAVES_ITEM_COLOR, itemBlock);
+            }
+        }
     }
 
     @Override
@@ -120,6 +130,24 @@ public class ClientProxy extends CommonProxy
                 0,
                 new ModelResourceLocation(ModRegistries.itemForestBerry.getRegistryName(), "inventory")
             );
+        }
+        
+        // Register model for Forest Berry Bush ItemBlock
+        if (ModRegistries.blockForestBerryBush != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockForestBerryBush);
+            if (itemBlock != null)
+            {
+                // Register models for all 3 stages (age 0, 1, 2)
+                for (int age = 0; age <= 2; age++)
+                {
+                    ModelLoader.setCustomModelResourceLocation(
+                        itemBlock,
+                        age,
+                        new ModelResourceLocation(ModRegistries.blockForestBerryBush.getRegistryName(), "age=" + age)
+                    );
+                }
+            }
         }
     }
 }

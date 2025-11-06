@@ -13,6 +13,7 @@ import com.herbalcure.herbalcure.HerbalCure;
 import com.herbalcure.herbalcure.common.block.BlockForestHeartwoodLog;
 import com.herbalcure.herbalcure.common.block.BlockForestHeartwoodLeaves;
 import com.herbalcure.herbalcure.common.block.BlockForestHeartwoodSapling;
+import com.herbalcure.herbalcure.common.block.BlockForestBerryBush;
 import com.herbalcure.herbalcure.common.item.ItemForestBerry;
 
 /**
@@ -31,6 +32,7 @@ public class ModRegistries
     public static BlockForestHeartwoodLog blockForestHeartwoodLog;
     public static BlockForestHeartwoodLeaves blockForestHeartwoodLeaves;
     public static BlockForestHeartwoodSapling blockForestHeartwoodSapling;
+    public static BlockForestBerryBush blockForestBerryBush;
     public static ItemForestBerry itemForestBerry;
 
     @SubscribeEvent
@@ -60,6 +62,13 @@ public class ModRegistries
         blockForestHeartwoodSapling.setUnlocalizedName("forest_heartwood_sapling");
         blockForestHeartwoodSapling.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockForestHeartwoodSapling);
+        
+        // Register Forest Berry Bush
+        blockForestBerryBush = new BlockForestBerryBush();
+        blockForestBerryBush.setRegistryName("forest_berry_bush");
+        blockForestBerryBush.setUnlocalizedName("forest_berry_bush");
+        blockForestBerryBush.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockForestBerryBush);
         
         HerbalCure.getLogger().info("Blocks registered!");
     }
@@ -102,6 +111,16 @@ public class ModRegistries
             ItemBlock itemBlock = new ItemBlock(blockForestHeartwoodSapling);
             itemBlock.setRegistryName(blockForestHeartwoodSapling.getRegistryName());
             itemBlock.setUnlocalizedName(blockForestHeartwoodSapling.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Forest Berry Bush
+        if (blockForestBerryBush != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockForestBerryBush);
+            itemBlock.setRegistryName(blockForestBerryBush.getRegistryName());
+            itemBlock.setUnlocalizedName(blockForestBerryBush.getUnlocalizedName());
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }

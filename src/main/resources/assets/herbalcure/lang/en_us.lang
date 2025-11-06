@@ -7,6 +7,7 @@
 tile.forest_heartwood_log.name=Forest Heartwood Log
 tile.forest_heartwood_leaves.name=Forest Heartwood Leaves
 tile.forest_heartwood_sapling.name=Forest Heartwood Sapling
+tile.forest_berry_bush.name=Forest Berry Bush
 
 # Items
 item.forest_heartwood_sapling.name=Forest Heartwood Sapling

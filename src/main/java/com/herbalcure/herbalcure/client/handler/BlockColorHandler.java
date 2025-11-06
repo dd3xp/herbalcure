@@ -71,6 +71,12 @@ public class BlockColorHandler
         {
             blockColors.registerBlockColorHandler(LEAVES_COLOR, ModRegistries.blockForestHeartwoodLeaves);
         }
+        
+        // Register berry bush color handler (uses same biome color as leaves)
+        if (ModRegistries.blockForestBerryBush != null)
+        {
+            blockColors.registerBlockColorHandler(LEAVES_COLOR, ModRegistries.blockForestBerryBush);
+        }
     }
 }
 
