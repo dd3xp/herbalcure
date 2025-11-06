@@ -237,10 +237,8 @@ public class BlockForestBerryBush extends BlockBush implements IGrowable
     @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
     {
-        // Add all 3 stages to creative tab
-        items.add(new ItemStack(this, 1, 0)); // Stage 0
-        items.add(new ItemStack(this, 1, 1)); // Stage 1
-        items.add(new ItemStack(this, 1, 2)); // Stage 2
+        // Don't add any stages to creative tab
+        // Players should obtain berry bushes by planting Forest Berries
     }
 
     @Override
