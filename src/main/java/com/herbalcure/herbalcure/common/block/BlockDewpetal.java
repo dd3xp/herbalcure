@@ -27,6 +27,8 @@ public class BlockDewpetal extends BlockBush
         setHardness(0.0F);
         setSoundType(SoundType.PLANT);
         setCreativeTab(HerbalCure.CREATIVE_TAB);
+        // Set light level to 10 (higher than redstone torch 7, lower than torch 14)
+        setLightLevel(10.0F / 15.0F);
     }
 
     @Override

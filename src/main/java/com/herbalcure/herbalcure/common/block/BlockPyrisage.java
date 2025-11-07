@@ -7,12 +7,15 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 /**
  * Pyrisage block
@@ -30,6 +33,8 @@ public class BlockPyrisage extends BlockBush
         setHardness(0.0F);
         setSoundType(SoundType.PLANT);
         setCreativeTab(HerbalCure.CREATIVE_TAB);
+        // Set light level to 10 (higher than redstone torch 7, lower than torch 14)
+        setLightLevel(10.0F / 15.0F);
     }
 
     @Override
@@ -76,6 +81,36 @@ public class BlockPyrisage extends BlockBush
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, net.minecraft.util.EnumFacing side)
     {
         return true;
+    }
+
+    /**
+     * Generate flame particles around the herb head to create a burning effect
+     * Particles don't rise up, just flicker around the top of the herb
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    {
+        double x = (double)pos.getX() + 0.5D;
+        double y = (double)pos.getY() + 0.4D + rand.nextDouble() * 0.2D;
+        double z = (double)pos.getZ() + 0.5D;
+        
+        double offsetX = (rand.nextDouble() - 0.5D) * 0.6D;
+        double offsetZ = (rand.nextDouble() - 0.5D) * 0.6D;
+        
+        if (rand.nextInt(10) < 3)
+        {
+            worldIn.spawnParticle(
+                EnumParticleTypes.FLAME,
+                x + offsetX,
+                y,
+                z + offsetZ,
+                0.0D,
+                0.0D,
+                0.0D,
+                new int[0]
+            );
+        }
     }
 }
 
