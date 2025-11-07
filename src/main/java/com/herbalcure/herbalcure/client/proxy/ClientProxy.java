@@ -149,6 +149,76 @@ public class ClientProxy extends CommonProxy
                 }
             }
         }
+        
+        // Register model for Verdscale Fern ItemBlock
+        if (ModRegistries.blockVerdscaleFern != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockVerdscaleFern);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+        }
+        
+        // Register model for Zephyr Lily ItemBlock
+        if (ModRegistries.blockZephyrLily != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockZephyrLily);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+        }
+        
+        // Register model for Dewpetal ItemBlock
+        if (ModRegistries.blockDewpetal != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockDewpetal);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+        }
+        
+        // Register model for Pyrisage ItemBlock
+        if (ModRegistries.blockPyrisage != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockPyrisage);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+        }
+        
+        // Register model for Rosynia ItemBlock
+        if (ModRegistries.blockRosynia != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockRosynia);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+        }
     }
 }
 

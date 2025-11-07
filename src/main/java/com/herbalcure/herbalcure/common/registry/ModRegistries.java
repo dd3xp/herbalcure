@@ -14,6 +14,11 @@ import com.herbalcure.herbalcure.common.block.BlockForestHeartwoodLog;
 import com.herbalcure.herbalcure.common.block.BlockForestHeartwoodLeaves;
 import com.herbalcure.herbalcure.common.block.BlockForestHeartwoodSapling;
 import com.herbalcure.herbalcure.common.block.BlockForestBerryBush;
+import com.herbalcure.herbalcure.common.block.BlockVerdscaleFern;
+import com.herbalcure.herbalcure.common.block.BlockZephyrLily;
+import com.herbalcure.herbalcure.common.block.BlockDewpetal;
+import com.herbalcure.herbalcure.common.block.BlockPyrisage;
+import com.herbalcure.herbalcure.common.block.BlockRosynia;
 import com.herbalcure.herbalcure.common.item.ItemForestBerry;
 
 /**
@@ -33,6 +38,11 @@ public class ModRegistries
     public static BlockForestHeartwoodLeaves blockForestHeartwoodLeaves;
     public static BlockForestHeartwoodSapling blockForestHeartwoodSapling;
     public static BlockForestBerryBush blockForestBerryBush;
+    public static BlockVerdscaleFern blockVerdscaleFern;
+    public static BlockZephyrLily blockZephyrLily;
+    public static BlockDewpetal blockDewpetal;
+    public static BlockPyrisage blockPyrisage;
+    public static BlockRosynia blockRosynia;
     public static ItemForestBerry itemForestBerry;
 
     @SubscribeEvent
@@ -69,6 +79,41 @@ public class ModRegistries
         blockForestBerryBush.setUnlocalizedName("forest_berry_bush");
         blockForestBerryBush.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockForestBerryBush);
+        
+        // Register Verdscale Fern
+        blockVerdscaleFern = new BlockVerdscaleFern();
+        blockVerdscaleFern.setRegistryName("verdscale_fern");
+        blockVerdscaleFern.setUnlocalizedName("verdscale_fern");
+        blockVerdscaleFern.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockVerdscaleFern);
+        
+        // Register Zephyr Lily
+        blockZephyrLily = new BlockZephyrLily();
+        blockZephyrLily.setRegistryName("zephyr_lily");
+        blockZephyrLily.setUnlocalizedName("zephyr_lily");
+        blockZephyrLily.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockZephyrLily);
+        
+        // Register Dewpetal
+        blockDewpetal = new BlockDewpetal();
+        blockDewpetal.setRegistryName("dewpetal");
+        blockDewpetal.setUnlocalizedName("dewpetal");
+        blockDewpetal.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockDewpetal);
+        
+        // Register Pyrisage
+        blockPyrisage = new BlockPyrisage();
+        blockPyrisage.setRegistryName("pyrisage");
+        blockPyrisage.setUnlocalizedName("pyrisage");
+        blockPyrisage.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockPyrisage);
+        
+        // Register Rosynia
+        blockRosynia = new BlockRosynia();
+        blockRosynia.setRegistryName("rosynia");
+        blockRosynia.setUnlocalizedName("rosynia");
+        blockRosynia.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockRosynia);
         
         HerbalCure.getLogger().info("Blocks registered!");
     }
@@ -121,6 +166,56 @@ public class ModRegistries
             ItemBlock itemBlock = new ItemBlock(blockForestBerryBush);
             itemBlock.setRegistryName(blockForestBerryBush.getRegistryName());
             itemBlock.setUnlocalizedName(blockForestBerryBush.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Verdscale Fern
+        if (blockVerdscaleFern != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockVerdscaleFern);
+            itemBlock.setRegistryName(blockVerdscaleFern.getRegistryName());
+            itemBlock.setUnlocalizedName(blockVerdscaleFern.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Zephyr Lily
+        if (blockZephyrLily != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockZephyrLily);
+            itemBlock.setRegistryName(blockZephyrLily.getRegistryName());
+            itemBlock.setUnlocalizedName(blockZephyrLily.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Dewpetal
+        if (blockDewpetal != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockDewpetal);
+            itemBlock.setRegistryName(blockDewpetal.getRegistryName());
+            itemBlock.setUnlocalizedName(blockDewpetal.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Pyrisage
+        if (blockPyrisage != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockPyrisage);
+            itemBlock.setRegistryName(blockPyrisage.getRegistryName());
+            itemBlock.setUnlocalizedName(blockPyrisage.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Rosynia
+        if (blockRosynia != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockRosynia);
+            itemBlock.setRegistryName(blockRosynia.getRegistryName());
+            itemBlock.setUnlocalizedName(blockRosynia.getUnlocalizedName());
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }
