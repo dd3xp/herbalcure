@@ -18,3 +18,9 @@ tile.rosynia.name=Rosynia
 item.forest_heartwood_sapling.name=Forest Heartwood Sapling
 item.forest_berry.name=Forest Berry
 
+# Armor
+item.weaveleaf_helmet.name=Weaveleaf Helmet
+item.weaveleaf_chestplate.name=Weaveleaf Chestplate
+item.weaveleaf_leggings.name=Weaveleaf Leggings
+item.weaveleaf_boots.name=Weaveleaf Boots
+

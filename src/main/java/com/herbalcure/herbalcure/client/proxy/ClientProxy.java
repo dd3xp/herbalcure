@@ -219,6 +219,43 @@ public class ClientProxy extends CommonProxy
                 );
             }
         }
+        
+        // Register models for Weaveleaf Armor
+        if (ModRegistries.itemWeaveleafHelmet != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemWeaveleafHelmet,
+                0,
+                new ModelResourceLocation(ModRegistries.itemWeaveleafHelmet.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemWeaveleafChestplate != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemWeaveleafChestplate,
+                0,
+                new ModelResourceLocation(ModRegistries.itemWeaveleafChestplate.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemWeaveleafLeggings != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemWeaveleafLeggings,
+                0,
+                new ModelResourceLocation(ModRegistries.itemWeaveleafLeggings.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemWeaveleafBoots != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemWeaveleafBoots,
+                0,
+                new ModelResourceLocation(ModRegistries.itemWeaveleafBoots.getRegistryName(), "inventory")
+            );
+        }
     }
 }
 

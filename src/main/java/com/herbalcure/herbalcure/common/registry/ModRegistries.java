@@ -20,6 +20,10 @@ import com.herbalcure.herbalcure.common.block.BlockDewpetal;
 import com.herbalcure.herbalcure.common.block.BlockPyrisage;
 import com.herbalcure.herbalcure.common.block.BlockRosynia;
 import com.herbalcure.herbalcure.common.item.ItemForestBerry;
+import com.herbalcure.herbalcure.common.item.ItemWeaveleafHelmet;
+import com.herbalcure.herbalcure.common.item.ItemWeaveleafChestplate;
+import com.herbalcure.herbalcure.common.item.ItemWeaveleafLeggings;
+import com.herbalcure.herbalcure.common.item.ItemWeaveleafBoots;
 
 /**
  * Mod registry manager
@@ -44,6 +48,10 @@ public class ModRegistries
     public static BlockPyrisage blockPyrisage;
     public static BlockRosynia blockRosynia;
     public static ItemForestBerry itemForestBerry;
+    public static ItemWeaveleafHelmet itemWeaveleafHelmet;
+    public static ItemWeaveleafChestplate itemWeaveleafChestplate;
+    public static ItemWeaveleafLeggings itemWeaveleafLeggings;
+    public static ItemWeaveleafBoots itemWeaveleafBoots;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -223,6 +231,19 @@ public class ModRegistries
         // Register Forest Berry
         itemForestBerry = new ItemForestBerry();
         registry.register(itemForestBerry);
+        
+        // Register Weaveleaf Armor
+        itemWeaveleafHelmet = new ItemWeaveleafHelmet();
+        registry.register(itemWeaveleafHelmet);
+        
+        itemWeaveleafChestplate = new ItemWeaveleafChestplate();
+        registry.register(itemWeaveleafChestplate);
+        
+        itemWeaveleafLeggings = new ItemWeaveleafLeggings();
+        registry.register(itemWeaveleafLeggings);
+        
+        itemWeaveleafBoots = new ItemWeaveleafBoots();
+        registry.register(itemWeaveleafBoots);
         
         HerbalCure.getLogger().info("Items registered!");
     }
