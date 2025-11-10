@@ -7,6 +7,7 @@ import com.herbalcure.herbalcure.common.world.gen.WorldGenZephyrLily;
 import com.herbalcure.herbalcure.common.world.gen.WorldGenDewpetal;
 import com.herbalcure.herbalcure.common.world.gen.WorldGenPyrisage;
 import com.herbalcure.herbalcure.common.world.gen.WorldGenRosynia;
+import com.herbalcure.herbalcure.common.world.gen.WorldGenCrystbud;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -59,6 +60,11 @@ public class CommonProxy
         HerbalCure.getLogger().info("Registering world generator for Rosynia...");
         GameRegistry.registerWorldGenerator(new WorldGenRosynia(), 10); // Priority 10 (higher = later)
         HerbalCure.getLogger().info("Rosynia world generator registered!");
+        
+        // Register world generator for Crystbud
+        HerbalCure.getLogger().info("Registering world generator for Crystbud...");
+        GameRegistry.registerWorldGenerator(new WorldGenCrystbud(), 10); // Priority 10 (higher = later)
+        HerbalCure.getLogger().info("Crystbud world generator registered!");
     }
 
     /**

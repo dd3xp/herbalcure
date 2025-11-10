@@ -19,6 +19,7 @@ import com.herbalcure.herbalcure.common.block.BlockZephyrLily;
 import com.herbalcure.herbalcure.common.block.BlockDewpetal;
 import com.herbalcure.herbalcure.common.block.BlockPyrisage;
 import com.herbalcure.herbalcure.common.block.BlockRosynia;
+import com.herbalcure.herbalcure.common.block.BlockCrystbud;
 import com.herbalcure.herbalcure.common.item.ItemForestBerry;
 import com.herbalcure.herbalcure.common.item.ItemWeaveleafHelmet;
 import com.herbalcure.herbalcure.common.item.ItemWeaveleafChestplate;
@@ -47,6 +48,7 @@ public class ModRegistries
     public static BlockDewpetal blockDewpetal;
     public static BlockPyrisage blockPyrisage;
     public static BlockRosynia blockRosynia;
+    public static BlockCrystbud blockCrystbud;
     public static ItemForestBerry itemForestBerry;
     public static ItemWeaveleafHelmet itemWeaveleafHelmet;
     public static ItemWeaveleafChestplate itemWeaveleafChestplate;
@@ -108,6 +110,13 @@ public class ModRegistries
         blockDewpetal.setUnlocalizedName("dewpetal");
         blockDewpetal.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockDewpetal);
+        
+        // Register Crystbud (before Pyrisage to appear first in creative tab)
+        blockCrystbud = new BlockCrystbud();
+        blockCrystbud.setRegistryName("crystbud");
+        blockCrystbud.setUnlocalizedName("crystbud");
+        blockCrystbud.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockCrystbud);
         
         // Register Pyrisage
         blockPyrisage = new BlockPyrisage();
@@ -204,6 +213,16 @@ public class ModRegistries
             ItemBlock itemBlock = new ItemBlock(blockDewpetal);
             itemBlock.setRegistryName(blockDewpetal.getRegistryName());
             itemBlock.setUnlocalizedName(blockDewpetal.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        
+        // Register ItemBlock for Crystbud (before Pyrisage to appear first in creative tab)
+        if (blockCrystbud != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockCrystbud);
+            itemBlock.setRegistryName(blockCrystbud.getRegistryName());
+            itemBlock.setUnlocalizedName(blockCrystbud.getUnlocalizedName());
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }

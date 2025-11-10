@@ -192,6 +192,20 @@ public class ClientProxy extends CommonProxy
             }
         }
         
+        // Register model for Crystbud ItemBlock (before Pyrisage to appear first in creative tab)
+        if (ModRegistries.blockCrystbud != null)
+        {
+            Item itemBlock = Item.getItemFromBlock(ModRegistries.blockCrystbud);
+            if (itemBlock != null)
+            {
+                ModelLoader.setCustomModelResourceLocation(
+                    itemBlock,
+                    0,
+                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory")
+                );
+            }
+        }
+        
         // Register model for Pyrisage ItemBlock
         if (ModRegistries.blockPyrisage != null)
         {
