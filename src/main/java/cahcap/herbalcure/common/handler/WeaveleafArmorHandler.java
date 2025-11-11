@@ -157,6 +157,7 @@ public class WeaveleafArmorHandler
     
     /**
      * Handle movement speed increase and auto-step (for boots)
+     * Also handles flying speed boost
      */
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
@@ -173,16 +174,29 @@ public class WeaveleafArmorHandler
         
         if (boots.getItem() instanceof ItemWeaveleafBoots && !boots.isEmpty())
         {
-            // Increase movement speed (50% faster) using attribute modifier
+            // Increase movement speed (30% faster) using attribute modifier
             // In 1.12.2, operation is an int: 0=ADD, 1=MULTIPLY, 2=MULTIPLY_BASE
             if (movementSpeed.getModifier(SPEED_MODIFIER_UUID) == null)
             {
                 movementSpeed.applyModifier(new AttributeModifier(
                     SPEED_MODIFIER_UUID,
                     "Weaveleaf Boots Speed Boost",
-                    0.5D, // 50% increase
+                    0.3D, // 30% increase
                     1 // MULTIPLY operation
                 ));
+            }
+            
+            // Increase flying speed by 30% (same as movement speed)
+            // Default fly speed is 0.05F, so 30% increase makes it 0.065F
+            // Apply whenever player has flying capability, not just when actively flying
+            if (player.capabilities.allowFlying)
+            {
+                // Only apply if not already modified (check if it's the default value or our modified value)
+                // We'll set it to 1.3x the default (0.05F * 1.3 = 0.065F)
+                if (player.capabilities.getFlySpeed() < 0.07F)
+                {
+                    player.capabilities.setFlySpeed(0.065F);
+                }
             }
             
             // Auto-step 1 block
@@ -196,6 +210,12 @@ public class WeaveleafArmorHandler
                 movementSpeed.removeModifier(SPEED_MODIFIER_UUID);
             }
             
+            // Reset flying speed if not wearing boots
+            if (player.capabilities.getFlySpeed() > 0.066F)
+            {
+                player.capabilities.setFlySpeed(0.05F); // Default fly speed
+            }
+            
             // Reset step height if not wearing boots
             if (player.stepHeight == 1.0F)
             {
@@ -205,8 +225,8 @@ public class WeaveleafArmorHandler
     }
     
     /**
-     * Handle jump height increase (for boots)
-     * Allows jumping to 2 blocks height
+     * Handle jump height increase and horizontal movement boost (for boots)
+     * Allows jumping to 2 blocks height and increases horizontal movement speed during jump
      */
     @SubscribeEvent
     public static void onLivingJump(LivingEvent.LivingJumpEvent event)
@@ -221,13 +241,25 @@ public class WeaveleafArmorHandler
         
         if (boots.getItem() instanceof ItemWeaveleafBoots && !boots.isEmpty())
         {
-            // Increase jump speed by 50% (same as movement speed increase)
+            // Increase jump height by 50%
             // This makes jump speed consistent with movement speed boost
             double currentMotionY = player.motionY;
             if (currentMotionY > 0.0D)
             {
                 // Increase jump speed by 50% (multiply by 1.5)
                 player.motionY = currentMotionY * 1.5D;
+            }
+            
+            // Increase horizontal movement speed during jump by 30%
+            // This makes jumping forward/backward/sideways faster
+            double currentMotionX = player.motionX;
+            double currentMotionZ = player.motionZ;
+            
+            // Only boost horizontal movement if player is actually moving horizontally
+            if (Math.abs(currentMotionX) > 0.01D || Math.abs(currentMotionZ) > 0.01D)
+            {
+                player.motionX = currentMotionX * 1.3D;
+                player.motionZ = currentMotionZ * 1.3D;
             }
         }
     }

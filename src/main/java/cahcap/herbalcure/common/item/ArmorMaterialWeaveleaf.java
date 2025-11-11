@@ -12,7 +12,7 @@ public class ArmorMaterialWeaveleaf
 {
     public static final ItemArmor.ArmorMaterial WEAVELEAF = EnumHelper.addArmorMaterial(
         "WEAVELEAF",
-        "herbalcure:weaveleaf",
+        "herbalcure:weaveleaf_armor",  // Use the actual texture path to prevent missing texture
         90, // Max durability (average of 92, 95, 98, 90 = 93.75, rounded to 90)
         new int[]{1, 6, 4, 1}, // Damage reduction: helmet, chestplate, leggings, boots
         0, // Enchantability (same as leather)
