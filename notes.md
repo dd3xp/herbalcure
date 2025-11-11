@@ -4,3 +4,6 @@
 签名参数: CN=HerbalCure Mod, OU=Mod, O=HerbalCure, L=Aurora, ST=Ontario, C=CA
 公钥: c66c93d47927d06d9ac4aab9cb6b637a0f638d2d
 钥匙库密码: redd33211xyz
+
+blockbench右键拖住可以平移
+blockbench如果要导出1.12.2的Java模型，需要先新建1.12.2的Java Entity模型，然后导入现有的bbmodel文件
