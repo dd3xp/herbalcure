@@ -21,7 +21,7 @@ item.forest_berry.name=Forest Berry
 
 # Armor
 item.weaveleaf_helmet.name=Weaveleaf Hood
-item.weaveleaf_chestplate.name=Weaveleaf Robe
-item.weaveleaf_leggings.name=Weaveleaf Greaves
+item.weaveleaf_chestplate.name=Weaveleaf Coat
+item.weaveleaf_leggings.name=Weaveleaf Robe
 item.weaveleaf_boots.name=Weaveleaf Boots
 

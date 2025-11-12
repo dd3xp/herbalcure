@@ -32,8 +32,10 @@ public class ModelWeaveleafArmor extends ModelArmor
     protected final ModelRenderer LeftRobeSideFront_r2;
     protected final ModelRenderer RightRobeBack;
     protected final ModelRenderer RightRobeBackSide_r1;
+    protected final ModelRenderer RightRobeRope;
     protected final ModelRenderer LeftRobeBack;
     protected final ModelRenderer LeftRobeBackSide_r1;
+    protected final ModelRenderer LeftRobeRope;
     protected final ModelRenderer RightArm;
     protected final ModelRenderer LeftArm;
     public final ModelRenderer RightLegBoots;
@@ -59,118 +61,6 @@ public class ModelWeaveleafArmor extends ModelArmor
         Body = new ModelRenderer(this);
         Body.setRotationPoint(0.0F, 0.0F, 0.0F);
         Body.cubeList.add(new ModelBox(Body, 16, 16, -4.0F, 0.0F, -2.0F, 8, 11, 4, 1.01F, false));
-
-        RightRobeSide = new ModelRenderer(this);
-        RightRobeSide.setRotationPoint(-5.1695F, 15.9086F, -3.0F);
-        Body.addChild(RightRobeSide);
-        setRotateAngle(RightRobeSide, 0.0F, 0.0F, 0.0436F);
-
-        RightRobeSideFront_r1 = new ModelRenderer(this);
-        RightRobeSideFront_r1.setRotationPoint(0.0F, 0.0F, 4.0F);
-        RightRobeSide.addChild(RightRobeSideFront_r1);
-        setRotateAngle(RightRobeSideFront_r1, 0.0F, -1.5708F, 0.1309F);
-        RightRobeSideFront_r1.cubeList.add(new ModelBox(RightRobeSideFront_r1, 8, 32, 1.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, false));
-
-        RightRobeSideCenter_r1 = new ModelRenderer(this);
-        RightRobeSideCenter_r1.setRotationPoint(0.0F, 0.0F, 0.0F);
-        RightRobeSide.addChild(RightRobeSideCenter_r1);
-        setRotateAngle(RightRobeSideCenter_r1, 0.0F, -1.5708F, 0.1309F);
-        RightRobeSideCenter_r1.cubeList.add(new ModelBox(RightRobeSideCenter_r1, 4, 32, 1.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, false));
-
-        RightRobeSideCenter_r2 = new ModelRenderer(this);
-        RightRobeSideCenter_r2.setRotationPoint(0.0F, 0.0F, 1.0F);
-        RightRobeSide.addChild(RightRobeSideCenter_r2);
-        setRotateAngle(RightRobeSideCenter_r2, 0.0F, -1.5708F, 0.1309F);
-        RightRobeSideCenter_r2.cubeList.add(new ModelBox(RightRobeSideCenter_r2, 4, 32, 1.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, false));
-
-        RightRobeSideCenter_r3 = new ModelRenderer(this);
-        RightRobeSideCenter_r3.setRotationPoint(0.0F, 0.0F, 2.0F);
-        RightRobeSide.addChild(RightRobeSideCenter_r3);
-        setRotateAngle(RightRobeSideCenter_r3, 0.0F, -1.5708F, 0.1309F);
-        RightRobeSideCenter_r3.cubeList.add(new ModelBox(RightRobeSideCenter_r3, 4, 32, 1.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, false));
-
-        RightRobeSideCenter_r4 = new ModelRenderer(this);
-        RightRobeSideCenter_r4.setRotationPoint(0.0F, 0.0F, 3.0F);
-        RightRobeSide.addChild(RightRobeSideCenter_r4);
-        setRotateAngle(RightRobeSideCenter_r4, 0.0F, -1.5708F, 0.1309F);
-        RightRobeSideCenter_r4.cubeList.add(new ModelBox(RightRobeSideCenter_r4, 4, 32, 1.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, false));
-
-        RightRobeSideFront_r2 = new ModelRenderer(this);
-        RightRobeSideFront_r2.setRotationPoint(0.0F, 0.0F, -1.0F);
-        RightRobeSide.addChild(RightRobeSideFront_r2);
-        setRotateAngle(RightRobeSideFront_r2, 0.0F, -1.5708F, 0.1309F);
-        RightRobeSideFront_r2.cubeList.add(new ModelBox(RightRobeSideFront_r2, 0, 32, 1.0F, -4.0F, -0.5F, 1, 6, 1, 0.0F, false));
-
-        LeftRobeSide = new ModelRenderer(this);
-        LeftRobeSide.setRotationPoint(5.1695F, 15.9086F, -3.0F);
-        Body.addChild(LeftRobeSide);
-        setRotateAngle(LeftRobeSide, 0.0F, 0.0F, -0.0436F);
-
-        LeftRobeSideFront_r1 = new ModelRenderer(this);
-        LeftRobeSideFront_r1.setRotationPoint(0.0F, 0.0F, 4.0F);
-        LeftRobeSide.addChild(LeftRobeSideFront_r1);
-        setRotateAngle(LeftRobeSideFront_r1, 0.0F, 1.5708F, -0.1309F);
-        LeftRobeSideFront_r1.cubeList.add(new ModelBox(LeftRobeSideFront_r1, 8, 32, -2.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, true));
-
-        LeftRobeSideCenter_r1 = new ModelRenderer(this);
-        LeftRobeSideCenter_r1.setRotationPoint(0.0F, 0.0F, 0.0F);
-        LeftRobeSide.addChild(LeftRobeSideCenter_r1);
-        setRotateAngle(LeftRobeSideCenter_r1, 0.0F, 1.5708F, -0.1309F);
-        LeftRobeSideCenter_r1.cubeList.add(new ModelBox(LeftRobeSideCenter_r1, 4, 32, -2.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, true));
-
-        LeftRobeSideCenter_r2 = new ModelRenderer(this);
-        LeftRobeSideCenter_r2.setRotationPoint(0.0F, 0.0F, 1.0F);
-        LeftRobeSide.addChild(LeftRobeSideCenter_r2);
-        setRotateAngle(LeftRobeSideCenter_r2, 0.0F, 1.5708F, -0.1309F);
-        LeftRobeSideCenter_r2.cubeList.add(new ModelBox(LeftRobeSideCenter_r2, 4, 32, -2.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, true));
-
-        LeftRobeSideCenter_r3 = new ModelRenderer(this);
-        LeftRobeSideCenter_r3.setRotationPoint(0.0F, 0.0F, 2.0F);
-        LeftRobeSide.addChild(LeftRobeSideCenter_r3);
-        setRotateAngle(LeftRobeSideCenter_r3, 0.0F, 1.5708F, -0.1309F);
-        LeftRobeSideCenter_r3.cubeList.add(new ModelBox(LeftRobeSideCenter_r3, 4, 32, -2.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, true));
-
-        LeftRobeSideCenter_r4 = new ModelRenderer(this);
-        LeftRobeSideCenter_r4.setRotationPoint(0.0F, 0.0F, 3.0F);
-        LeftRobeSide.addChild(LeftRobeSideCenter_r4);
-        setRotateAngle(LeftRobeSideCenter_r4, 0.0F, 1.5708F, -0.1309F);
-        LeftRobeSideCenter_r4.cubeList.add(new ModelBox(LeftRobeSideCenter_r4, 4, 32, -2.0F, -4.0F, -0.5F, 1, 7, 1, 0.0F, true));
-
-        LeftRobeSideFront_r2 = new ModelRenderer(this);
-        LeftRobeSideFront_r2.setRotationPoint(0.0F, 0.0F, -1.0F);
-        LeftRobeSide.addChild(LeftRobeSideFront_r2);
-        setRotateAngle(LeftRobeSideFront_r2, 0.0F, 1.5708F, -0.1309F);
-        LeftRobeSideFront_r2.cubeList.add(new ModelBox(LeftRobeSideFront_r2, 0, 32, -2.0F, -4.0F, -0.5F, 1, 6, 1, 0.0F, true));
-
-        RightRobeBack = new ModelRenderer(this);
-        RightRobeBack.setRotationPoint(1.5F, 17.0883F, 3.1085F);
-        Body.addChild(RightRobeBack);
-        setRotateAngle(RightRobeBack, 0.0436F, 0.0F, 0.0F);
-
-        RightRobeBackSide_r1 = new ModelRenderer(this);
-        RightRobeBackSide_r1.setRotationPoint(-2.0F, -1.19F, -0.074F);
-        RightRobeBack.addChild(RightRobeBackSide_r1);
-        setRotateAngle(RightRobeBackSide_r1, 0.1309F, 0.0F, 0.0F);
-        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 16, 32, -0.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, false));
-        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 16, 32, -1.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, false));
-        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 16, 32, -2.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, false));
-        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 16, 32, -3.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, false));
-        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 12, 32, -4.5F, -3.9653F, -0.303F, 1, 7, 1, 0.0F, false));
-
-        LeftRobeBack = new ModelRenderer(this);
-        LeftRobeBack.setRotationPoint(-1.5F, 17.0883F, 3.1085F);
-        Body.addChild(LeftRobeBack);
-        setRotateAngle(LeftRobeBack, 0.0436F, 0.0F, 0.0F);
-
-        LeftRobeBackSide_r1 = new ModelRenderer(this);
-        LeftRobeBackSide_r1.setRotationPoint(2.0F, -1.19F, -0.074F);
-        LeftRobeBack.addChild(LeftRobeBackSide_r1);
-        setRotateAngle(LeftRobeBackSide_r1, 0.1309F, 0.0F, 0.0F);
-        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 16, 32, -0.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, true));
-        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 16, 32, 0.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, true));
-        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 16, 32, 1.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, true));
-        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 16, 32, 2.5F, -3.9653F, -0.303F, 1, 8, 1, 0.0F, true));
-        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 12, 32, 3.5F, -3.9653F, -0.303F, 1, 7, 1, 0.0F, true));
 
         RightArm = new ModelRenderer(this);
         RightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
@@ -199,11 +89,135 @@ public class ModelWeaveleafArmor extends ModelArmor
 
         RightLegLeggings = new ModelRenderer(this);
         RightLegLeggings.setRotationPoint(-1.9F, 12.0F, 0.0F);
-        RightLegLeggings.cubeList.add(new ModelBox(RightLegLeggings, 0, 40, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.5F, false));
+
+        RightRobeSide = new ModelRenderer(this);
+        RightRobeSide.setRotationPoint(-3.6695F, 3.9086F, -3.0F);
+        RightLegLeggings.addChild(RightRobeSide);
+        setRotateAngle(RightRobeSide, 0.0F, 0.0F, 0.0436F);
+
+        RightRobeSideFront_r1 = new ModelRenderer(this);
+        RightRobeSideFront_r1.setRotationPoint(0.0F, 0.0F, 4.0F);
+        RightRobeSide.addChild(RightRobeSideFront_r1);
+        setRotateAngle(RightRobeSideFront_r1, 0.0F, -1.5708F, 0.1309F);
+        RightRobeSideFront_r1.cubeList.add(new ModelBox(RightRobeSideFront_r1, 8, 32, 1.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, false));
+
+        RightRobeSideCenter_r1 = new ModelRenderer(this);
+        RightRobeSideCenter_r1.setRotationPoint(0.0F, 0.0F, 0.0F);
+        RightRobeSide.addChild(RightRobeSideCenter_r1);
+        setRotateAngle(RightRobeSideCenter_r1, 0.0F, -1.5708F, 0.1309F);
+        RightRobeSideCenter_r1.cubeList.add(new ModelBox(RightRobeSideCenter_r1, 4, 32, 1.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, false));
+
+        RightRobeSideCenter_r2 = new ModelRenderer(this);
+        RightRobeSideCenter_r2.setRotationPoint(0.0F, 0.0F, 1.0F);
+        RightRobeSide.addChild(RightRobeSideCenter_r2);
+        setRotateAngle(RightRobeSideCenter_r2, 0.0F, -1.5708F, 0.1309F);
+        RightRobeSideCenter_r2.cubeList.add(new ModelBox(RightRobeSideCenter_r2, 4, 32, 1.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, false));
+
+        RightRobeSideCenter_r3 = new ModelRenderer(this);
+        RightRobeSideCenter_r3.setRotationPoint(0.0F, 0.0F, 2.0F);
+        RightRobeSide.addChild(RightRobeSideCenter_r3);
+        setRotateAngle(RightRobeSideCenter_r3, 0.0F, -1.5708F, 0.1309F);
+        RightRobeSideCenter_r3.cubeList.add(new ModelBox(RightRobeSideCenter_r3, 4, 32, 1.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, false));
+
+        RightRobeSideCenter_r4 = new ModelRenderer(this);
+        RightRobeSideCenter_r4.setRotationPoint(0.0F, 0.0F, 3.0F);
+        RightRobeSide.addChild(RightRobeSideCenter_r4);
+        setRotateAngle(RightRobeSideCenter_r4, 0.0F, -1.5708F, 0.1309F);
+        RightRobeSideCenter_r4.cubeList.add(new ModelBox(RightRobeSideCenter_r4, 4, 32, 1.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, false));
+
+        RightRobeSideFront_r2 = new ModelRenderer(this);
+        RightRobeSideFront_r2.setRotationPoint(0.0F, 0.0F, -1.0F);
+        RightRobeSide.addChild(RightRobeSideFront_r2);
+        setRotateAngle(RightRobeSideFront_r2, 0.0F, -1.5708F, 0.1309F);
+        RightRobeSideFront_r2.cubeList.add(new ModelBox(RightRobeSideFront_r2, 0, 32, 1.0F, -6.0F, -0.5F, 1, 8, 1, 0.0F, false));
+
+        RightRobeBack = new ModelRenderer(this);
+        RightRobeBack.setRotationPoint(3.4F, 5.0883F, 3.5085F);
+        RightLegLeggings.addChild(RightRobeBack);
+        setRotateAngle(RightRobeBack, 0.0436F, 0.0F, 0.0F);
+
+        RightRobeBackSide_r1 = new ModelRenderer(this);
+        RightRobeBackSide_r1.setRotationPoint(-5.0F, -1.19F, -0.074F);
+        RightRobeBack.addChild(RightRobeBackSide_r1);
+        setRotateAngle(RightRobeBackSide_r1, 0.1309F, 0.0F, 0.0F);
+        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 40, 44, -0.5F, -5.9653F, -0.303F, 4, 10, 1, 0.0F, true));
+        RightRobeBackSide_r1.cubeList.add(new ModelBox(RightRobeBackSide_r1, 12, 32, -1.5F, -5.9653F, -0.303F, 1, 9, 1, 0.0F, false));
+
+        RightRobeRope = new ModelRenderer(this);
+        RightRobeRope.setRotationPoint(-0.2F, -1.4F, 1.6F);
+        RightLegLeggings.addChild(RightRobeRope);
+        setRotateAngle(RightRobeRope, 0.0F, 1.5708F, 0.0F);
+        RightRobeRope.cubeList.add(new ModelBox(RightRobeRope, 14, 58, -0.5F, -0.5211F, -2.0F, 1, 1, 1, 0.0F, false));
+        RightRobeRope.cubeList.add(new ModelBox(RightRobeRope, 14, 58, -0.5F, -0.5211F, 1.0F, 1, 1, 1, 0.0F, false));
+        RightRobeRope.cubeList.add(new ModelBox(RightRobeRope, 14, 58, -0.5F, -0.5211F, 1.1F, 1, 1, 1, 0.0F, false));
+        RightRobeRope.cubeList.add(new ModelBox(RightRobeRope, 14, 58, -0.5F, -0.5211F, 0.0F, 1, 1, 1, 0.0F, false));
+        RightRobeRope.cubeList.add(new ModelBox(RightRobeRope, 14, 58, -0.5F, -0.5211F, -1.0F, 1, 1, 1, 0.0F, false));
 
         LeftLegLeggings = new ModelRenderer(this);
         LeftLegLeggings.setRotationPoint(1.9F, 12.0F, 0.0F);
-        LeftLegLeggings.cubeList.add(new ModelBox(LeftLegLeggings, 0, 40, -2.0F, 0.0F, -2.0F, 4, 12, 4, 0.5F, true));
+
+        LeftRobeSide = new ModelRenderer(this);
+        LeftRobeSide.setRotationPoint(3.6695F, 3.9086F, -3.0F);
+        LeftLegLeggings.addChild(LeftRobeSide);
+        setRotateAngle(LeftRobeSide, 0.0F, 0.0F, -0.0436F);
+
+        LeftRobeSideFront_r1 = new ModelRenderer(this);
+        LeftRobeSideFront_r1.setRotationPoint(0.0F, 0.0F, 4.0F);
+        LeftRobeSide.addChild(LeftRobeSideFront_r1);
+        setRotateAngle(LeftRobeSideFront_r1, 0.0F, 1.5708F, -0.1309F);
+        LeftRobeSideFront_r1.cubeList.add(new ModelBox(LeftRobeSideFront_r1, 8, 32, -2.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, true));
+
+        LeftRobeSideCenter_r1 = new ModelRenderer(this);
+        LeftRobeSideCenter_r1.setRotationPoint(0.0F, 0.0F, 0.0F);
+        LeftRobeSide.addChild(LeftRobeSideCenter_r1);
+        setRotateAngle(LeftRobeSideCenter_r1, 0.0F, 1.5708F, -0.1309F);
+        LeftRobeSideCenter_r1.cubeList.add(new ModelBox(LeftRobeSideCenter_r1, 4, 32, -2.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, true));
+
+        LeftRobeSideCenter_r2 = new ModelRenderer(this);
+        LeftRobeSideCenter_r2.setRotationPoint(0.0F, 0.0F, 1.0F);
+        LeftRobeSide.addChild(LeftRobeSideCenter_r2);
+        setRotateAngle(LeftRobeSideCenter_r2, 0.0F, 1.5708F, -0.1309F);
+        LeftRobeSideCenter_r2.cubeList.add(new ModelBox(LeftRobeSideCenter_r2, 4, 32, -2.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, true));
+
+        LeftRobeSideCenter_r3 = new ModelRenderer(this);
+        LeftRobeSideCenter_r3.setRotationPoint(0.0F, 0.0F, 2.0F);
+        LeftRobeSide.addChild(LeftRobeSideCenter_r3);
+        setRotateAngle(LeftRobeSideCenter_r3, 0.0F, 1.5708F, -0.1309F);
+        LeftRobeSideCenter_r3.cubeList.add(new ModelBox(LeftRobeSideCenter_r3, 4, 32, -2.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, true));
+
+        LeftRobeSideCenter_r4 = new ModelRenderer(this);
+        LeftRobeSideCenter_r4.setRotationPoint(0.0F, 0.0F, 3.0F);
+        LeftRobeSide.addChild(LeftRobeSideCenter_r4);
+        setRotateAngle(LeftRobeSideCenter_r4, 0.0F, 1.5708F, -0.1309F);
+        LeftRobeSideCenter_r4.cubeList.add(new ModelBox(LeftRobeSideCenter_r4, 4, 32, -2.0F, -6.0F, -0.5F, 1, 9, 1, 0.0F, true));
+
+        LeftRobeSideFront_r2 = new ModelRenderer(this);
+        LeftRobeSideFront_r2.setRotationPoint(0.0F, 0.0F, -1.0F);
+        LeftRobeSide.addChild(LeftRobeSideFront_r2);
+        setRotateAngle(LeftRobeSideFront_r2, 0.0F, 1.5708F, -0.1309F);
+        LeftRobeSideFront_r2.cubeList.add(new ModelBox(LeftRobeSideFront_r2, 0, 32, -2.0F, -6.0F, -0.5F, 1, 8, 1, 0.0F, true));
+
+        LeftRobeBack = new ModelRenderer(this);
+        LeftRobeBack.setRotationPoint(-3.4F, 5.0883F, 3.5085F);
+        LeftLegLeggings.addChild(LeftRobeBack);
+        setRotateAngle(LeftRobeBack, 0.0436F, 0.0F, 0.0F);
+
+        LeftRobeBackSide_r1 = new ModelRenderer(this);
+        LeftRobeBackSide_r1.setRotationPoint(2.0F, -1.19F, -0.074F);
+        LeftRobeBack.addChild(LeftRobeBackSide_r1);
+        setRotateAngle(LeftRobeBackSide_r1, 0.1309F, 0.0F, 0.0F);
+        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 29, 44, -0.5F, -5.9653F, -0.303F, 4, 10, 1, 0.0F, true));
+        LeftRobeBackSide_r1.cubeList.add(new ModelBox(LeftRobeBackSide_r1, 12, 32, 3.5F, -5.9653F, -0.303F, 1, 9, 1, 0.0F, true));
+
+        LeftRobeRope = new ModelRenderer(this);
+        LeftRobeRope.setRotationPoint(0.2F, -1.4F, 1.6F);
+        LeftLegLeggings.addChild(LeftRobeRope);
+        setRotateAngle(LeftRobeRope, 0.0F, 1.5708F, 0.0F);
+        LeftRobeRope.cubeList.add(new ModelBox(LeftRobeRope, 14, 58, -0.5F, -0.5211F, -2.0F, 1, 1, 1, 0.0F, false));
+        LeftRobeRope.cubeList.add(new ModelBox(LeftRobeRope, 14, 58, -0.5F, -0.5211F, 1.0F, 1, 1, 1, 0.0F, false));
+        LeftRobeRope.cubeList.add(new ModelBox(LeftRobeRope, 14, 58, -0.5F, -0.5211F, 1.1F, 1, 1, 1, 0.0F, false));
+        LeftRobeRope.cubeList.add(new ModelBox(LeftRobeRope, 14, 58, -0.5F, -0.5211F, 0.0F, 1, 1, 1, 0.0F, false));
+        LeftRobeRope.cubeList.add(new ModelBox(LeftRobeRope, 14, 58, -0.5F, -0.5211F, -1.0F, 1, 1, 1, 0.0F, false));
         
         // Map custom parts to ModelBiped parts
         this.bipedRightLeg = RightLegLeggings;
@@ -245,6 +259,4 @@ public class ModelWeaveleafArmor extends ModelArmor
 
         super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     }
-
 }
-
