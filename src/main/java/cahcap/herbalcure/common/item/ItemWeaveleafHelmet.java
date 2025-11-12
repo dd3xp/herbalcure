@@ -36,6 +36,7 @@ public class ItemWeaveleafHelmet extends ItemArmor
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
     {
+        // All armor pieces use the same texture file
         return "herbalcure:textures/models/armor/weaveleaf_armor.png";
     }
 

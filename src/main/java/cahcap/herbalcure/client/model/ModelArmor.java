@@ -8,6 +8,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 
 /**
  * Base armor model class
+ * Extends ModelBiped to work with Minecraft's armor rendering system
  */
 public class ModelArmor extends ModelBiped
 {
@@ -55,7 +56,7 @@ public class ModelArmor extends ModelBiped
         }
     }
 
-    protected void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    protected void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z)
     {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
