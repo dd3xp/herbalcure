@@ -5,15 +5,12 @@ import cahcap.herbalcure.common.item.ItemWeaveleafBoots;
 import cahcap.herbalcure.common.item.ItemWeaveleafChestplate;
 import cahcap.herbalcure.common.item.ItemWeaveleafHelmet;
 import cahcap.herbalcure.common.item.ItemWeaveleafLeggings;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import java.util.UUID;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +25,11 @@ public class WeaveleafArmorHandler
 {
     private static final int DURABILITY_REGEN_TICK_INTERVAL = 20; // 1 second (20 ticks)
     private static final int HEALTH_REGEN_TICK_INTERVAL = 100; // 5 seconds (100 ticks)
-    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("8C5B5B5B-5B5B-5B5B-5B5B-5B5B5B5B5B5B");
+    
+    // Speed boost value: 30% of base movement speed (base speed is typically 0.1, so 30% = 0.03)
+    // This makes final speed = 130% of base speed
+    // Using constant for better performance (no calculation every tick)
+    private static final float SPEED_BOOST = 0.03F;
     
     /**
      * Handle durability regeneration (1 point per second for all armor pieces)
@@ -157,7 +158,7 @@ public class WeaveleafArmorHandler
     
     /**
      * Handle movement speed increase and auto-step (for boots)
-     * Also handles flying speed boost
+     * Uses moveRelative method to work on ice and other special blocks
      */
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
@@ -170,52 +171,43 @@ public class WeaveleafArmorHandler
         EntityPlayer player = (EntityPlayer) event.getEntityLiving();
         ItemStack boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
         
-        IAttributeInstance movementSpeed = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-        
         if (boots.getItem() instanceof ItemWeaveleafBoots && !boots.isEmpty())
         {
-            // Increase movement speed (30% faster) using attribute modifier
-            // In 1.12.2, operation is an int: 0=ADD, 1=MULTIPLY, 2=MULTIPLY_BASE
-            if (movementSpeed.getModifier(SPEED_MODIFIER_UUID) == null)
+            // Auto-step 1 block, but not when sneaking or moving backward
+            if (!player.isSneaking() && player.moveForward >= 0F)
             {
-                movementSpeed.applyModifier(new AttributeModifier(
-                    SPEED_MODIFIER_UUID,
-                    "Weaveleaf Boots Speed Boost",
-                    0.3D, // 30% increase
-                    1 // MULTIPLY operation
-                ));
+                player.stepHeight = 1.0F;
+            }
+            else
+            {
+                player.stepHeight = 0.6F; // Default step height when sneaking or moving backward
             }
             
-            // Increase flying speed by 30% (same as movement speed)
-            // Default fly speed is 0.05F, so 30% increase makes it 0.065F
-            // Apply whenever player has flying capability, not just when actively flying
-            if (player.capabilities.allowFlying)
+            // Apply movement speed boost using moveRelative (works on ice and other special blocks)
+            // This is done on client side only
+            // Using moveRelative instead of attribute modifier ensures it works on ice and other special blocks
+            if (player.world.isRemote)
             {
-                // Only apply if not already modified (check if it's the default value or our modified value)
-                // We'll set it to 1.3x the default (0.05F * 1.3 = 0.065F)
-                if (player.capabilities.getFlySpeed() < 0.07F)
+                // Apply when player is on ground, moving forward, and not in water
+                if (player.onGround && player.moveForward > 0F && !player.isInsideOfMaterial(Material.WATER))
                 {
-                    player.capabilities.setFlySpeed(0.065F);
+                    // Use constant speed boost value (30% of base movement speed = 0.03)
+                    // Final speed = base speed * 1.3 (130% of base speed)
+                    // This avoids recalculating every tick for better performance
+                    player.moveRelative(0F, 0F, 1F, SPEED_BOOST);
+                }
+                // Also apply when player is in air (jumping/falling) but not flying, to affect jump hang time speed
+                // Use half the speed boost to avoid speed being faster than ground speed
+                else if (!player.onGround && !player.capabilities.isFlying && player.moveForward > 0F && !player.isInsideOfMaterial(Material.WATER))
+                {
+                    // Apply half speed boost during jump/fall to affect jump hang time speed
+                    // This ensures jump horizontal speed is consistent but not faster than ground speed
+                    player.moveRelative(0F, 0F, 1F, SPEED_BOOST * 0.5F);
                 }
             }
-            
-            // Auto-step 1 block
-            player.stepHeight = 1.0F;
         }
         else
         {
-            // Remove speed modifier if not wearing boots
-            if (movementSpeed.getModifier(SPEED_MODIFIER_UUID) != null)
-            {
-                movementSpeed.removeModifier(SPEED_MODIFIER_UUID);
-            }
-            
-            // Reset flying speed if not wearing boots
-            if (player.capabilities.getFlySpeed() > 0.066F)
-            {
-                player.capabilities.setFlySpeed(0.05F); // Default fly speed
-            }
-            
             // Reset step height if not wearing boots
             if (player.stepHeight == 1.0F)
             {
@@ -250,17 +242,8 @@ public class WeaveleafArmorHandler
                 player.motionY = currentMotionY * 1.5D;
             }
             
-            // Increase horizontal movement speed during jump by 30%
-            // This makes jumping forward/backward/sideways faster
-            double currentMotionX = player.motionX;
-            double currentMotionZ = player.motionZ;
-            
-            // Only boost horizontal movement if player is actually moving horizontally
-            if (Math.abs(currentMotionX) > 0.01D || Math.abs(currentMotionZ) > 0.01D)
-            {
-                player.motionX = currentMotionX * 1.3D;
-                player.motionZ = currentMotionZ * 1.3D;
-            }
+            // Note: Horizontal movement speed during jump is handled by onLivingUpdate
+            // using moveRelative with half the speed boost, so we don't need to modify motionX/motionZ here
         }
     }
 }
