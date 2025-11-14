@@ -33,6 +33,7 @@ public class WeaveleafArmorHandler
     
     /**
      * Handle durability regeneration (1 point per second for all armor pieces)
+     * Durability regeneration works for armor in inventory, not just equipped
      * Handle health regeneration (1 HP per 5 seconds for helmet)
      * Handle Haste 1 buff (permanent for chestplate)
      */
@@ -50,52 +51,50 @@ public class WeaveleafArmorHandler
             return;
         }
         
-        // Check if player is wearing Weaveleaf armor
+        // Check if player is wearing Weaveleaf armor (for special effects)
         ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
         ItemStack chestplate = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
         ItemStack leggings = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
         ItemStack boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
         
-        boolean wearingWeaveleaf = false;
-        
-        // Durability regeneration (1 point per second for all armor pieces)
-        if (helmet.getItem() instanceof ItemWeaveleafHelmet && !helmet.isEmpty() && helmet.getItemDamage() > 0)
+        // Durability regeneration (1 point per second for all armor pieces in inventory)
+        // Check all items in player's inventory, including equipped armor
+        if (player.ticksExisted % DURABILITY_REGEN_TICK_INTERVAL == 0)
         {
-            wearingWeaveleaf = true;
-            if (player.ticksExisted % DURABILITY_REGEN_TICK_INTERVAL == 0)
+            // Check main inventory (0-35 slots)
+            for (int i = 0; i < player.inventory.mainInventory.size(); i++)
             {
-                helmet.setItemDamage(Math.max(0, helmet.getItemDamage() - 1));
+                ItemStack stack = player.inventory.mainInventory.get(i);
+                if (!stack.isEmpty() && stack.getItemDamage() > 0)
+                {
+                    if (stack.getItem() instanceof ItemWeaveleafHelmet ||
+                        stack.getItem() instanceof ItemWeaveleafChestplate ||
+                        stack.getItem() instanceof ItemWeaveleafLeggings ||
+                        stack.getItem() instanceof ItemWeaveleafBoots)
+                    {
+                        stack.setItemDamage(Math.max(0, stack.getItemDamage() - 1));
+                    }
+                }
+            }
+            
+            // Check armor inventory (36-39 slots: boots, leggings, chestplate, helmet)
+            for (int i = 0; i < player.inventory.armorInventory.size(); i++)
+            {
+                ItemStack stack = player.inventory.armorInventory.get(i);
+                if (!stack.isEmpty() && stack.getItemDamage() > 0)
+                {
+                    if (stack.getItem() instanceof ItemWeaveleafHelmet ||
+                        stack.getItem() instanceof ItemWeaveleafChestplate ||
+                        stack.getItem() instanceof ItemWeaveleafLeggings ||
+                        stack.getItem() instanceof ItemWeaveleafBoots)
+                    {
+                        stack.setItemDamage(Math.max(0, stack.getItemDamage() - 1));
+                    }
+                }
             }
         }
         
-        if (chestplate.getItem() instanceof ItemWeaveleafChestplate && !chestplate.isEmpty() && chestplate.getItemDamage() > 0)
-        {
-            wearingWeaveleaf = true;
-            if (player.ticksExisted % DURABILITY_REGEN_TICK_INTERVAL == 0)
-            {
-                chestplate.setItemDamage(Math.max(0, chestplate.getItemDamage() - 1));
-            }
-        }
-        
-        if (leggings.getItem() instanceof ItemWeaveleafLeggings && !leggings.isEmpty() && leggings.getItemDamage() > 0)
-        {
-            wearingWeaveleaf = true;
-            if (player.ticksExisted % DURABILITY_REGEN_TICK_INTERVAL == 0)
-            {
-                leggings.setItemDamage(Math.max(0, leggings.getItemDamage() - 1));
-            }
-        }
-        
-        if (boots.getItem() instanceof ItemWeaveleafBoots && !boots.isEmpty() && boots.getItemDamage() > 0)
-        {
-            wearingWeaveleaf = true;
-            if (player.ticksExisted % DURABILITY_REGEN_TICK_INTERVAL == 0)
-            {
-                boots.setItemDamage(Math.max(0, boots.getItemDamage() - 1));
-            }
-        }
-        
-        // Health regeneration (1 HP per 5 seconds for helmet)
+        // Health regeneration (1 HP per 5 seconds for helmet) - only when equipped
         if (helmet.getItem() instanceof ItemWeaveleafHelmet && !helmet.isEmpty())
         {
             if (player.ticksExisted % HEALTH_REGEN_TICK_INTERVAL == 0)
@@ -107,7 +106,7 @@ public class WeaveleafArmorHandler
             }
         }
         
-        // Haste 1 buff (permanent for chestplate)
+        // Haste 1 buff (permanent for chestplate) - only when equipped
         // Refresh every 1.5 seconds (30 ticks) instead of every tick for better performance
         if (chestplate.getItem() instanceof ItemWeaveleafChestplate && !chestplate.isEmpty())
         {
