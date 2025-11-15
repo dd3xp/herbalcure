@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "herbalcure:blocks/pyrisage_crop_stage3"
+    }
+}
+

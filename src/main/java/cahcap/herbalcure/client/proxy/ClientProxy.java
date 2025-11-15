@@ -270,6 +270,126 @@ public class ClientProxy extends CommonProxy
                 new ModelResourceLocation(ModRegistries.itemWeaveleafBoots.getRegistryName(), "inventory")
             );
         }
+        
+        // Register models for Herb Seeds - Order: Verdscale Fern, Dewpetal, Zephyr Lily, Crystbud, Pyrisage, Rosynia
+        if (ModRegistries.itemVerdscaleFernSeed != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemVerdscaleFernSeed,
+                0,
+                new ModelResourceLocation(ModRegistries.itemVerdscaleFernSeed.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemDewpetalSeed != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemDewpetalSeed,
+                0,
+                new ModelResourceLocation(ModRegistries.itemDewpetalSeed.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemZephyrLilySeed != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemZephyrLilySeed,
+                0,
+                new ModelResourceLocation(ModRegistries.itemZephyrLilySeed.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemCrystbudSeed != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemCrystbudSeed,
+                0,
+                new ModelResourceLocation(ModRegistries.itemCrystbudSeed.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemPyrisageSeed != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemPyrisageSeed,
+                0,
+                new ModelResourceLocation(ModRegistries.itemPyrisageSeed.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemRosyniaSeed != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemRosyniaSeed,
+                0,
+                new ModelResourceLocation(ModRegistries.itemRosyniaSeed.getRegistryName(), "inventory")
+            );
+        }
+        
+        // Register models for Product Items - Order: Scaleplate, Dewpetal Shard, Golden Lilybell, Cryst Spine, Burnt Node, Heart of Stardream
+        if (ModRegistries.itemScaleplate != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemScaleplate,
+                0,
+                new ModelResourceLocation(ModRegistries.itemScaleplate.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemDewpetalShard != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemDewpetalShard,
+                0,
+                new ModelResourceLocation(ModRegistries.itemDewpetalShard.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemGoldenLilybell != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemGoldenLilybell,
+                0,
+                new ModelResourceLocation(ModRegistries.itemGoldenLilybell.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemCrystSpine != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemCrystSpine,
+                0,
+                new ModelResourceLocation(ModRegistries.itemCrystSpine.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemBurntNode != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemBurntNode,
+                0,
+                new ModelResourceLocation(ModRegistries.itemBurntNode.getRegistryName(), "inventory")
+            );
+        }
+        
+        if (ModRegistries.itemHeartOfStardream != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemHeartOfStardream,
+                0,
+                new ModelResourceLocation(ModRegistries.itemHeartOfStardream.getRegistryName(), "inventory")
+            );
+        }
+        
+        // Register model for Weaveflow Loop
+        if (ModRegistries.itemWeaveflowLoop != null)
+        {
+            ModelLoader.setCustomModelResourceLocation(
+                ModRegistries.itemWeaveflowLoop,
+                0,
+                new ModelResourceLocation(ModRegistries.itemWeaveflowLoop.getRegistryName(), "inventory")
+            );
+        }
     }
 
 }

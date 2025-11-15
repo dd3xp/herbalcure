@@ -19,6 +19,25 @@ tile.crystbud.name=Crystbud
 item.forest_heartwood_sapling.name=Forest Heartwood Sapling
 item.forest_berry.name=Forest Berry
 
+# Seeds
+item.verdscale_fern_seed.name=Verdscale Fern Seed
+item.dewpetal_seed.name=Dewpetal Seed
+item.zephyr_lily_seed.name=Zephyr Lily Seed
+item.crystbud_seed.name=Crystallization Seed
+item.pyrisage_seed.name=Ember Seed
+item.rosynia_seed.name=Mysterious Seed
+
+# Products
+item.scaleplate.name=Scaleplate
+item.dewpetal_shard.name=Dewpetal Shard
+item.golden_lilybell.name=Golden Lilybell
+item.cryst_spine.name=Cryst Spine
+item.burnt_node.name=Burnt Node
+item.heart_of_stardream.name=Heart of Stardream
+
+# Tools
+item.weaveflow_loop.name=Weaveflow Loop
+
 # Armor
 item.weaveleaf_helmet.name=Weaveleaf Hood
 item.weaveleaf_chestplate.name=Weaveleaf Coat

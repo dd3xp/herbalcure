@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "herbalcure:blocks/verdscale_fern_crop_stage0"
+    }
+}
+

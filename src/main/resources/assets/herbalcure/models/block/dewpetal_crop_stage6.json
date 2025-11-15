@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "herbalcure:blocks/dewpetal_crop_stage6"
+    }
+}
+

@@ -20,12 +20,17 @@ public class HerbalCureCreativeTab extends CreativeTabs
     @Override
     public ItemStack getTabIconItem()
     {
-        // Use Forest Heartwood Leaves as the icon for the creative tab
+        // Use Weaveflow Loop as the icon for the creative tab
+        if (ModRegistries.itemWeaveflowLoop != null)
+        {
+            return new ItemStack(ModRegistries.itemWeaveflowLoop);
+        }
+        // Fallback: use Forest Heartwood Leaves if Weaveflow Loop is not available
         if (ModRegistries.blockForestHeartwoodLeaves != null)
         {
             return new ItemStack(net.minecraft.item.Item.getItemFromBlock(ModRegistries.blockForestHeartwoodLeaves));
         }
-        // Fallback: use a stick if leaves are not available
+        // Final fallback: use a stick
         return new ItemStack(net.minecraft.init.Items.STICK);
     }
 

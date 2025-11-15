@@ -20,11 +20,30 @@ import cahcap.herbalcure.common.block.BlockDewpetal;
 import cahcap.herbalcure.common.block.BlockPyrisage;
 import cahcap.herbalcure.common.block.BlockRosynia;
 import cahcap.herbalcure.common.block.BlockCrystbud;
+import cahcap.herbalcure.common.block.BlockVerdscaleFernCrop;
+import cahcap.herbalcure.common.block.BlockDewpetalCrop;
+import cahcap.herbalcure.common.block.BlockZephyrLilyCrop;
+import cahcap.herbalcure.common.block.BlockCrystbudCrop;
+import cahcap.herbalcure.common.block.BlockPyrisageCrop;
+import cahcap.herbalcure.common.block.BlockRosyniaCrop;
 import cahcap.herbalcure.common.item.ItemForestBerry;
 import cahcap.herbalcure.common.item.ItemWeaveleafHelmet;
 import cahcap.herbalcure.common.item.ItemWeaveleafChestplate;
 import cahcap.herbalcure.common.item.ItemWeaveleafLeggings;
 import cahcap.herbalcure.common.item.ItemWeaveleafBoots;
+import cahcap.herbalcure.common.item.ItemVerdscaleFernSeed;
+import cahcap.herbalcure.common.item.ItemDewpetalSeed;
+import cahcap.herbalcure.common.item.ItemZephyrLilySeed;
+import cahcap.herbalcure.common.item.ItemCrystbudSeed;
+import cahcap.herbalcure.common.item.ItemPyrisageSeed;
+import cahcap.herbalcure.common.item.ItemRosyniaSeed;
+import cahcap.herbalcure.common.item.ItemScaleplate;
+import cahcap.herbalcure.common.item.ItemDewpetalShard;
+import cahcap.herbalcure.common.item.ItemGoldenLilybell;
+import cahcap.herbalcure.common.item.ItemCrystSpine;
+import cahcap.herbalcure.common.item.ItemBurntNode;
+import cahcap.herbalcure.common.item.ItemHeartOfStardream;
+import cahcap.herbalcure.common.item.ItemWeaveflowLoop;
 
 /**
  * Mod registry manager
@@ -49,11 +68,30 @@ public class ModRegistries
     public static BlockPyrisage blockPyrisage;
     public static BlockRosynia blockRosynia;
     public static BlockCrystbud blockCrystbud;
+    public static BlockVerdscaleFernCrop blockVerdscaleFernCrop;
+    public static BlockDewpetalCrop blockDewpetalCrop;
+    public static BlockZephyrLilyCrop blockZephyrLilyCrop;
+    public static BlockCrystbudCrop blockCrystbudCrop;
+    public static BlockPyrisageCrop blockPyrisageCrop;
+    public static BlockRosyniaCrop blockRosyniaCrop;
     public static ItemForestBerry itemForestBerry;
     public static ItemWeaveleafHelmet itemWeaveleafHelmet;
     public static ItemWeaveleafChestplate itemWeaveleafChestplate;
     public static ItemWeaveleafLeggings itemWeaveleafLeggings;
     public static ItemWeaveleafBoots itemWeaveleafBoots;
+    public static ItemVerdscaleFernSeed itemVerdscaleFernSeed;
+    public static ItemDewpetalSeed itemDewpetalSeed;
+    public static ItemZephyrLilySeed itemZephyrLilySeed;
+    public static ItemCrystbudSeed itemCrystbudSeed;
+    public static ItemPyrisageSeed itemPyrisageSeed;
+    public static ItemRosyniaSeed itemRosyniaSeed;
+    public static ItemScaleplate itemScaleplate;
+    public static ItemDewpetalShard itemDewpetalShard;
+    public static ItemGoldenLilybell itemGoldenLilybell;
+    public static ItemCrystSpine itemCrystSpine;
+    public static ItemBurntNode itemBurntNode;
+    public static ItemHeartOfStardream itemHeartOfStardream;
+    public static ItemWeaveflowLoop itemWeaveflowLoop;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -90,47 +128,74 @@ public class ModRegistries
         blockForestBerryBush.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockForestBerryBush);
         
-        // Register Verdscale Fern
+        // Register Herb Flowers and Crops - Order: Verdscale Fern, Dewpetal, Zephyr Lily, Crystbud, Pyrisage, Rosynia
+        // For each herb: Flower -> Crop
+        
+        // Verdscale Fern: Flower -> Crop
         blockVerdscaleFern = new BlockVerdscaleFern();
         blockVerdscaleFern.setRegistryName("verdscale_fern");
         blockVerdscaleFern.setUnlocalizedName("verdscale_fern");
         blockVerdscaleFern.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockVerdscaleFern);
+        blockVerdscaleFernCrop = new BlockVerdscaleFernCrop();
+        blockVerdscaleFernCrop.setRegistryName("verdscale_fern_crop");
+        blockVerdscaleFernCrop.setUnlocalizedName("verdscale_fern_crop");
+        registry.register(blockVerdscaleFernCrop);
         
-        // Register Zephyr Lily
-        blockZephyrLily = new BlockZephyrLily();
-        blockZephyrLily.setRegistryName("zephyr_lily");
-        blockZephyrLily.setUnlocalizedName("zephyr_lily");
-        blockZephyrLily.setCreativeTab(HerbalCure.CREATIVE_TAB);
-        registry.register(blockZephyrLily);
-        
-        // Register Dewpetal
+        // Dewpetal: Flower -> Crop
         blockDewpetal = new BlockDewpetal();
         blockDewpetal.setRegistryName("dewpetal");
         blockDewpetal.setUnlocalizedName("dewpetal");
         blockDewpetal.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockDewpetal);
+        blockDewpetalCrop = new BlockDewpetalCrop();
+        blockDewpetalCrop.setRegistryName("dewpetal_crop");
+        blockDewpetalCrop.setUnlocalizedName("dewpetal_crop");
+        registry.register(blockDewpetalCrop);
         
-        // Register Crystbud (before Pyrisage to appear first in creative tab)
+        // Zephyr Lily: Flower -> Crop
+        blockZephyrLily = new BlockZephyrLily();
+        blockZephyrLily.setRegistryName("zephyr_lily");
+        blockZephyrLily.setUnlocalizedName("zephyr_lily");
+        blockZephyrLily.setCreativeTab(HerbalCure.CREATIVE_TAB);
+        registry.register(blockZephyrLily);
+        blockZephyrLilyCrop = new BlockZephyrLilyCrop();
+        blockZephyrLilyCrop.setRegistryName("zephyr_lily_crop");
+        blockZephyrLilyCrop.setUnlocalizedName("zephyr_lily_crop");
+        registry.register(blockZephyrLilyCrop);
+        
+        // Crystbud: Flower -> Crop
         blockCrystbud = new BlockCrystbud();
         blockCrystbud.setRegistryName("crystbud");
         blockCrystbud.setUnlocalizedName("crystbud");
         blockCrystbud.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockCrystbud);
+        blockCrystbudCrop = new BlockCrystbudCrop();
+        blockCrystbudCrop.setRegistryName("crystbud_crop");
+        blockCrystbudCrop.setUnlocalizedName("crystbud_crop");
+        registry.register(blockCrystbudCrop);
         
-        // Register Pyrisage
+        // Pyrisage: Flower -> Crop
         blockPyrisage = new BlockPyrisage();
         blockPyrisage.setRegistryName("pyrisage");
         blockPyrisage.setUnlocalizedName("pyrisage");
         blockPyrisage.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockPyrisage);
+        blockPyrisageCrop = new BlockPyrisageCrop();
+        blockPyrisageCrop.setRegistryName("pyrisage_crop");
+        blockPyrisageCrop.setUnlocalizedName("pyrisage_crop");
+        registry.register(blockPyrisageCrop);
         
-        // Register Rosynia
+        // Rosynia: Flower -> Crop
         blockRosynia = new BlockRosynia();
         blockRosynia.setRegistryName("rosynia");
         blockRosynia.setUnlocalizedName("rosynia");
         blockRosynia.setCreativeTab(HerbalCure.CREATIVE_TAB);
         registry.register(blockRosynia);
+        blockRosyniaCrop = new BlockRosyniaCrop();
+        blockRosyniaCrop.setRegistryName("rosynia_crop");
+        blockRosyniaCrop.setUnlocalizedName("rosynia_crop");
+        registry.register(blockRosyniaCrop);
         
         HerbalCure.getLogger().info("Blocks registered!");
     }
@@ -187,7 +252,14 @@ public class ModRegistries
             registry.register(itemBlock);
         }
         
-        // Register ItemBlock for Verdscale Fern
+        // Register Forest Berry (before herbs)
+        itemForestBerry = new ItemForestBerry();
+        registry.register(itemForestBerry);
+        
+        // Register Herbs - Order: Verdscale Fern, Dewpetal, Zephyr Lily, Crystbud, Pyrisage, Rosynia
+        // For each herb: Flower (ItemBlock) -> Seed -> Product
+        
+        // Verdscale Fern: Flower -> Seed -> Product
         if (blockVerdscaleFern != null)
         {
             ItemBlock itemBlock = new ItemBlock(blockVerdscaleFern);
@@ -196,18 +268,12 @@ public class ModRegistries
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }
+        itemVerdscaleFernSeed = new ItemVerdscaleFernSeed(blockVerdscaleFernCrop);
+        registry.register(itemVerdscaleFernSeed);
+        itemScaleplate = new ItemScaleplate();
+        registry.register(itemScaleplate);
         
-        // Register ItemBlock for Zephyr Lily
-        if (blockZephyrLily != null)
-        {
-            ItemBlock itemBlock = new ItemBlock(blockZephyrLily);
-            itemBlock.setRegistryName(blockZephyrLily.getRegistryName());
-            itemBlock.setUnlocalizedName(blockZephyrLily.getUnlocalizedName());
-            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
-            registry.register(itemBlock);
-        }
-        
-        // Register ItemBlock for Dewpetal
+        // Dewpetal: Flower -> Seed -> Product
         if (blockDewpetal != null)
         {
             ItemBlock itemBlock = new ItemBlock(blockDewpetal);
@@ -216,8 +282,26 @@ public class ModRegistries
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }
+        itemDewpetalSeed = new ItemDewpetalSeed(blockDewpetalCrop);
+        registry.register(itemDewpetalSeed);
+        itemDewpetalShard = new ItemDewpetalShard();
+        registry.register(itemDewpetalShard);
         
-        // Register ItemBlock for Crystbud (before Pyrisage to appear first in creative tab)
+        // Zephyr Lily: Flower -> Seed -> Product
+        if (blockZephyrLily != null)
+        {
+            ItemBlock itemBlock = new ItemBlock(blockZephyrLily);
+            itemBlock.setRegistryName(blockZephyrLily.getRegistryName());
+            itemBlock.setUnlocalizedName(blockZephyrLily.getUnlocalizedName());
+            itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
+            registry.register(itemBlock);
+        }
+        itemZephyrLilySeed = new ItemZephyrLilySeed(blockZephyrLilyCrop);
+        registry.register(itemZephyrLilySeed);
+        itemGoldenLilybell = new ItemGoldenLilybell();
+        registry.register(itemGoldenLilybell);
+        
+        // Crystbud: Flower -> Seed -> Product
         if (blockCrystbud != null)
         {
             ItemBlock itemBlock = new ItemBlock(blockCrystbud);
@@ -226,8 +310,12 @@ public class ModRegistries
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }
+        itemCrystbudSeed = new ItemCrystbudSeed(blockCrystbudCrop);
+        registry.register(itemCrystbudSeed);
+        itemCrystSpine = new ItemCrystSpine();
+        registry.register(itemCrystSpine);
         
-        // Register ItemBlock for Pyrisage
+        // Pyrisage: Flower -> Seed -> Product
         if (blockPyrisage != null)
         {
             ItemBlock itemBlock = new ItemBlock(blockPyrisage);
@@ -236,8 +324,12 @@ public class ModRegistries
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }
+        itemPyrisageSeed = new ItemPyrisageSeed(blockPyrisageCrop);
+        registry.register(itemPyrisageSeed);
+        itemBurntNode = new ItemBurntNode();
+        registry.register(itemBurntNode);
         
-        // Register ItemBlock for Rosynia
+        // Rosynia: Flower -> Seed -> Product
         if (blockRosynia != null)
         {
             ItemBlock itemBlock = new ItemBlock(blockRosynia);
@@ -246,10 +338,14 @@ public class ModRegistries
             itemBlock.setCreativeTab(HerbalCure.CREATIVE_TAB);
             registry.register(itemBlock);
         }
+        itemRosyniaSeed = new ItemRosyniaSeed(blockRosyniaCrop);
+        registry.register(itemRosyniaSeed);
+        itemHeartOfStardream = new ItemHeartOfStardream();
+        registry.register(itemHeartOfStardream);
         
-        // Register Forest Berry
-        itemForestBerry = new ItemForestBerry();
-        registry.register(itemForestBerry);
+        // Register Weaveflow Loop
+        itemWeaveflowLoop = new ItemWeaveflowLoop();
+        registry.register(itemWeaveflowLoop);
         
         // Register Weaveleaf Armor
         itemWeaveleafHelmet = new ItemWeaveleafHelmet();

@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "herbalcure:blocks/zephyr_lily_crop_stage1"
+    }
+}
+

@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "herbalcure:blocks/rosynia_crop_stage2"
+    }
+}
+
